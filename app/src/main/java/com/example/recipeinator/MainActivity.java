@@ -2,70 +2,32 @@ package com.example.recipeinator;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipeinator.Activities.GroceryListActivity;
+import com.example.recipeinator.Activities.HomeActivity;
 import com.example.recipeinator.Activities.ProfileActivity;
 import com.example.recipeinator.Activities.RandomActivity;
 import com.example.recipeinator.Activities.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView homebtn, searchbtn, randombtn, grocerylistbtn, navprofilebtn;
-
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState){
-       super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-       // Linking ImageViews with NavBar
-
-       homebtn = findViewById(R.id.navbar_home);
-       searchbtn = findViewById(R.id.navbar_search);
-       randombtn = findViewById(R.id.navbar_random);
-       grocerylistbtn = findViewById(R.id.navbar_grocerylist);
-       navprofilebtn = findViewById(R.id.navbar_profile);
-
-       // Linking Buttons with Activities
-
-       homebtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-               startActivity(intent);
-           }
-       });
-       searchbtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-               startActivity(intent);
-           }
-       });
-       randombtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(getApplicationContext(), RandomActivity.class);
-               startActivity(intent);
-           }
-       });
-       grocerylistbtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(getApplicationContext(), GroceryListActivity.class);
-               startActivity(intent);
-           }
-       });
-       navprofilebtn.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-               startActivity(intent);
-           }
-       });
-   }
+        final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+            }
+        }, 1700);
+    }
 
 }
