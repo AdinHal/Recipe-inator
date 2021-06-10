@@ -1,4 +1,4 @@
-package com.example.recipeinator;
+package com.example.recipeinator.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
