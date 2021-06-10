@@ -6,32 +6,30 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Recipe {
+public class Ingredient {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "recipe_id") public int id;
+    @ColumnInfo(name = "ingredient_id") public int id;
     @ColumnInfo(name = "name") public String name;
-    @ColumnInfo(name = "preparation_time") public String preparationTime;
 
-    public Recipe(){
+    public Ingredient(){
     }
 
     @Ignore
-    public Recipe(String name) {
+    public Ingredient(String name) {
         this.name = name;
     }
 
     @Ignore
-    public Recipe(int id, String name) {
+    public Ingredient(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Recipe{" +
+        return "Ingredient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", preparationTime='" + preparationTime + '\'' +
                 '}';
     }
 }
