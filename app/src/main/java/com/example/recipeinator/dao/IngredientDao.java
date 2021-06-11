@@ -14,6 +14,9 @@ public interface IngredientDao {
     @Query("SELECT * FROM Ingredient")
     List<Ingredient> getAll();
 
+    @Query("SELECT * FROM Ingredient WHERE name=:name")
+    Ingredient getByName(String name);
+
     @Insert
     void insertAll(Ingredient... ingredients);
 
