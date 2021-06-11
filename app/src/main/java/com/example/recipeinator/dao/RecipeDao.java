@@ -7,7 +7,7 @@ import androidx.room.Transaction;
 
 import com.example.recipeinator.models.Ingredient;
 import com.example.recipeinator.models.Recipe;
-import com.example.recipeinator.models.RecipeContainsIngredient;
+import com.example.recipeinator.models.RecipeIngredientCrossRef;
 import com.example.recipeinator.models.RecipeIngredients;
 
 import java.util.List;
@@ -16,6 +16,9 @@ import java.util.List;
 public interface RecipeDao {
     @Query("SELECT * FROM Recipe")
     List<Recipe> getAll();
+
+    @Query("SELECT * FROM Recipe WHERE recipe_id=:recipeId")
+    Recipe getById(int recipeId);
 
     @Transaction
     @Query("SELECT * FROM Recipe")
@@ -26,7 +29,7 @@ public interface RecipeDao {
     RecipeIngredients getRecipeIngredientsFor(int recipeId);
 
     @Insert
-    void addRecipeIngredients(RecipeContainsIngredient... ingredients);
+    void insertRecipeIngredients(RecipeIngredientCrossRef... ingredients);
 
     @Insert
     void insertAll(Recipe... recipes);
