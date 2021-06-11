@@ -41,6 +41,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(database);
     }
 
+    public void openDatabase() {
+        database = this.getWritableDatabase();
+    }
+
     public void addItems(GroceriesModel groceriesModel){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ITEM,groceriesModel.getItem());
@@ -56,13 +60,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         try {
             cursor = database.query(GROCERIES_TABLE, null, null, null, null, null, null, null);
             if (cursor != null) {
-                do {
-                    GroceriesModel groceriesModel = new GroceriesModel();
-                    groceriesModel.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-                    groceriesModel.setItem(cursor.getString(cursor.getColumnIndex(ITEM)));
-                    groceriesModel.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
-                    itemList.add(groceriesModel);
-                } while (cursor.moveToNext());
+                if(cursor.moveToFirst()){
+                    do {
+                        GroceriesModel groceriesModel = new GroceriesModel();
+                        groceriesModel.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+                        groceriesModel.setItem(cursor.getString(cursor.getColumnIndex(ITEM)));
+                        groceriesModel.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
+                        itemList.add(groceriesModel);
+                    } while (cursor.moveToNext());
+                }
             }
         }
         finally {
