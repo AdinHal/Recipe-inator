@@ -17,8 +17,15 @@ public interface IngredientDao {
     @Query("SELECT * FROM Ingredient WHERE name=:name")
     Ingredient getByName(String name);
 
+    default void insertAll(Ingredient... ingredients){
+        long[] ids = _insertAll(ingredients);
+        for (int i = 0; i < ingredients.length; i++) {
+            ingredients[i].id = (int) ids[i];
+        }
+    }
+
     @Insert
-    void insertAll(Ingredient... ingredients);
+    long[] _insertAll(Ingredient... ingredients);
 
     @Delete
     void deleteAll(Ingredient... ingredients);
