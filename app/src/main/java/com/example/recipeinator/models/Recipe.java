@@ -3,14 +3,15 @@ package com.example.recipeinator.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(indices={@Index(value="name", unique=true)})
 public class Recipe {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "recipe_id") public int id;
     @ColumnInfo(name = "name") public String name;
-    @ColumnInfo(name = "preparation_time") public String preparationTime;
+    @ColumnInfo(name = "preparation_time") public int preparationTime;
 
     public Recipe(){
     }
@@ -31,7 +32,7 @@ public class Recipe {
         return "Recipe{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", preparationTime='" + preparationTime + '\'' +
+                ", preparationTime=" + preparationTime +
                 '}';
     }
 }
