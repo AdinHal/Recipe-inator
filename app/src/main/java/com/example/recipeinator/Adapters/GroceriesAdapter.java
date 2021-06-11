@@ -1,6 +1,7 @@
 package com.example.recipeinator.Adapters;
 
 import com.example.recipeinator.AddNewItem;
+import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
 
 import android.content.Context;
@@ -9,25 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipeinator.Activities.GroceryListActivity;
-import com.example.recipeinator.Model.GroceriesModel;
-import com.example.recipeinator.Utils.DatabaseHandler;
+import com.example.recipeinator.models.Groceries;
 
 import java.util.List;
 
 public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.ViewHolder> {
 
-    private List<GroceriesModel> groceriesList;
+    private List<Groceries> groceriesList;
     private GroceryListActivity activity;
-    private DatabaseHandler databaseHandler;
+    private AppDatabase database;
 
-    public GroceriesAdapter(DatabaseHandler databaseHandler,GroceryListActivity activity){
+    public GroceriesAdapter(AppDatabase database, GroceryListActivity activity){
         this.activity=activity;
-        this.databaseHandler = databaseHandler;
+        this.database = database;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -36,19 +35,12 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
     }
 
     public void onBindViewHolder(ViewHolder holder, int position){
-        databaseHandler.openDatabase();
-        GroceriesModel item = groceriesList.get(position);
-        holder.task.setText(item.getItem());
-        holder.task.setChecked(toBoolean(item.getStatus()));
-        holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    databaseHandler.statusUpdate(item.getId(), 1);
-                }else{
-                    databaseHandler.statusUpdate(item.getId(),0);
-                }
-            }
+        Groceries item = groceriesList.get(position);
+        holder.task.setText(item.item);
+        holder.task.setChecked(item.status);
+        holder.task.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            item.status = isChecked;
+            database.groceriesDao().update(item);
         });
     }
     @Override
@@ -56,11 +48,7 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
         return groceriesList.size();
     }
 
-    private boolean toBoolean(int number){
-        return number!=0;
-    }
-
-    public void setTasks(List<GroceriesModel>groceriesList){
+    public void setTasks(List<Groceries>groceriesList){
         this.groceriesList=groceriesList;
         notifyDataSetChanged();
     }
@@ -70,21 +58,16 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
     }
 
     public void deleteItem(int position){
-        GroceriesModel item = groceriesList.get(position);
-        databaseHandler.taskRemove(item.getId());
+        Groceries item = groceriesList.get(position);
+        database.groceriesDao().taskRemove(item);
         groceriesList.remove(position);
         notifyItemRemoved(position);
 
     }
 
     public void editItem(int position){
-        GroceriesModel item = groceriesList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putInt("id",item.getId());
-        bundle.putString("item",item.getItem());
-        AddNewItem fragment = new AddNewItem();
-        fragment.setArguments(bundle);
-        fragment.show(activity.getSupportFragmentManager(),AddNewItem.TAG);
+        Groceries item = groceriesList.get(position);
+        new AddNewItem(database, item).show(activity.getSupportFragmentManager(),AddNewItem.TAG);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

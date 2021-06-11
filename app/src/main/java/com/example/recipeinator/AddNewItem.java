@@ -15,8 +15,7 @@ import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.recipeinator.Model.GroceriesModel;
-import com.example.recipeinator.Utils.DatabaseHandler;
+import com.example.recipeinator.models.Groceries;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class AddNewItem extends BottomSheetDialogFragment {
@@ -24,10 +23,19 @@ public class AddNewItem extends BottomSheetDialogFragment {
     public static final String TAG = "ActionBottomDialog";
     private EditText newItemText;
     private Button newItemSaveButton;
-    private DatabaseHandler databaseHandler;
+    private AppDatabase database;
+    private Groceries groceries;
 
-    public static AddNewItem newInstance(){
-        return new AddNewItem();
+    public AddNewItem(){
+    }
+
+    public AddNewItem(AppDatabase database){
+        this.database = database;
+    }
+
+    public AddNewItem(AppDatabase database, Groceries groceries){
+        this.database = database;
+        this.groceries = groceries;
     }
 
     @Override
@@ -49,16 +57,9 @@ public class AddNewItem extends BottomSheetDialogFragment {
         newItemText = getView().findViewById(R.id.newTaskText);
         newItemSaveButton = getView().findViewById(R.id.newTaskButton);
 
-        databaseHandler = new DatabaseHandler(getActivity());
-        databaseHandler.openDatabase();
-
-        boolean isUpdated = false;
-        final Bundle bundle = getArguments();
-        if(bundle!=null){
-            isUpdated = true;
-            String item = bundle.getString("item");
-            newItemText.setText(item);
-            if(item.length()>0){
+        if(groceries!=null){
+            newItemText.setText(groceries.item);
+            if(groceries.item.length()>0){
                 newItemSaveButton.setTextColor(ContextCompat.getColor(getContext(),R.color.black));
             }
         }
@@ -86,18 +87,16 @@ public class AddNewItem extends BottomSheetDialogFragment {
             }
         });
 
-        boolean finalIsUpdated = isUpdated;
         newItemSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String text = newItemText.getText().toString();
-                if(finalIsUpdated) {
-                    databaseHandler.taskUpdate(bundle.getInt("id"), text);
+                if(groceries != null) {
+                    groceries.item = text;
+                    database.groceriesDao().update(groceries);
                 }else{
-                    GroceriesModel gm = new GroceriesModel();
-                    gm.setItem(text);
-                    gm.setStatus(0);
-                    databaseHandler.addItems(gm);
+                    groceries = new Groceries(text);
+                    database.groceriesDao().addItems(groceries);
                 }
                 dismiss();
             }

@@ -3,6 +3,7 @@ package com.example.recipeinator.Activities;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,15 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.recipeinator.Adapters.GroceriesAdapter;
 import com.example.recipeinator.AddNewItem;
+import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.DialogCloseListener;
-import com.example.recipeinator.MainActivity;
-import com.example.recipeinator.Model.GroceriesModel;
 import com.example.recipeinator.R;
 import com.example.recipeinator.RecyclerItemTouchHelper;
-import com.example.recipeinator.Utils.DatabaseHandler;
+import com.example.recipeinator.models.Groceries;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,8 +33,8 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
     private GroceriesAdapter groceriesAdapter;
     private ImageView floatingActionButton;
 
-    private List<GroceriesModel> groceriesList;
-    private DatabaseHandler databaseHandler;
+    private List<Groceries> groceriesList;
+    private AppDatabase database;
 
     @SuppressLint("ResourceType")
     @Override
@@ -87,15 +88,18 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
             }
         });
 
-        databaseHandler = new DatabaseHandler(this);
-        databaseHandler.openDatabase();
+        database = Room.databaseBuilder(
+            getApplicationContext(),
+            AppDatabase.class,
+            "database"
+        ).allowMainThreadQueries().build();
 
         groceriesList = new ArrayList<>();
 
         tasksRecyclerView = findViewById(R.id.tasksRecycleView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        groceriesAdapter = new GroceriesAdapter(databaseHandler,this);
+        groceriesAdapter = new GroceriesAdapter(database,this);
         tasksRecyclerView.setAdapter(groceriesAdapter);
 
         floatingActionButton = findViewById(R.id.grocerylist_addbutton);
@@ -103,14 +107,14 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(groceriesAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
-        groceriesList = databaseHandler.getAllItems();
+        groceriesList = database.groceriesDao().getAllItems();
         Collections.reverse(groceriesList);
         groceriesAdapter.setTasks(groceriesList);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddNewItem.newInstance().show(getSupportFragmentManager(),AddNewItem.TAG);
+                new AddNewItem(database).show(getSupportFragmentManager(),AddNewItem.TAG);
             }
         });
     }
@@ -118,7 +122,7 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
 
     @Override
     public void handleDialogClose(DialogInterface dialogInterface){
-        groceriesList = databaseHandler.getAllItems();
+        groceriesList = database.groceriesDao().getAllItems();
         Collections.reverse(groceriesList);
         groceriesAdapter.setTasks(groceriesList);
         groceriesAdapter.notifyDataSetChanged();
