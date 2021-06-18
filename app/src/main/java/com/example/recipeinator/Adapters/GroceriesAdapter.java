@@ -5,7 +5,6 @@ import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.taskview,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_view,parent,false);
         return new ViewHolder(itemView);
     }
 

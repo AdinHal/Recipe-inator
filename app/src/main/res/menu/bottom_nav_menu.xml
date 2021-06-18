@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_home"
+        android:enabled="true"
+        android:icon="@drawable/zuhause"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/page_search"
+        android:enabled="true"
+        android:icon="@drawable/lupe"
+        android:title="@string/search"/>
+    <item
+        android:id="@+id/page_random"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_casino_24"
+        android:title="@string/random"/>
+    <item
+        android:id="@+id/page_list"
+        android:enabled="true"
+        android:icon="@drawable/list"
+        android:title="@string/groceries"/>
+    <item
+        android:id="@+id/page_profile"
+        android:enabled="true"
+        android:icon="@drawable/user"
+        android:title="@string/profile"/>
+</menu>

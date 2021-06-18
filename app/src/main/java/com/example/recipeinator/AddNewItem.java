@@ -46,7 +46,7 @@ public class AddNewItem extends BottomSheetDialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.createnewitemview, container,false);
+        View view = inflater.inflate(R.layout.create_new_item_view, container,false);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return view;
     }
@@ -87,19 +87,16 @@ public class AddNewItem extends BottomSheetDialogFragment {
             }
         });
 
-        newItemSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = newItemText.getText().toString();
-                if(groceries != null) {
-                    groceries.item = text;
-                    database.groceriesDao().update(groceries);
-                }else{
-                    groceries = new Groceries(text);
-                    database.groceriesDao().addItems(groceries);
-                }
-                dismiss();
+        newItemSaveButton.setOnClickListener(v -> {
+            String text = newItemText.getText().toString();
+            if(groceries != null) {
+                groceries.item = text;
+                database.groceriesDao().update(groceries);
+            }else{
+                groceries = new Groceries(text);
+                database.groceriesDao().addItems(groceries);
             }
+            dismiss();
         });
     }
 
