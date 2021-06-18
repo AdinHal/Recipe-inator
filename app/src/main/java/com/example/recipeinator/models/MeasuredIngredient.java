@@ -4,6 +4,9 @@ public class MeasuredIngredient extends Ingredient {
     public int amount;
     public String unit;
 
+    public MeasuredIngredient(){
+    }
+
     public MeasuredIngredient(Ingredient ingredient, int amount, String unit){
         super(ingredient.id, ingredient.name);
         this.amount = amount;

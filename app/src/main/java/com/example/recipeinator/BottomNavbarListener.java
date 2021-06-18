@@ -28,7 +28,7 @@ public class BottomNavbarListener implements BottomNavigationView.OnNavigationIt
             intent = new Intent(activity, HomeActivity.class);
         } else if (itemId == R.id.page_search) {
             intent = new Intent(activity, SearchActivity.class);
-        } else if (itemId == R.id.page_random) {
+        } else if (itemId == R.id.page_recipes) {
             intent = new Intent(activity, RandomActivity.class);
         } else if (itemId == R.id.page_list) {
             intent = new Intent(activity, GroceryListActivity.class);

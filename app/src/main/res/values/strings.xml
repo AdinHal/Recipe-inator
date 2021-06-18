@@ -5,4 +5,11 @@
     <string name="random">Random</string>
     <string name="groceries">Groceries</string>
     <string name="profile">Profile</string>
+    <string name="unit">Unit</string>
+    <string name="amount">Amount</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="recipe">Recipe</string>
+    <string name="preparation_time">Preparation Time</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="recipes">Recipes</string>
 </resources>
