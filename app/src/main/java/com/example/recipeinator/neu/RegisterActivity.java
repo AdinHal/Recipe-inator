@@ -8,10 +8,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipeinator.Activities.HomeActivity;
-import com.example.recipeinator.neu.DatabaseAdapter;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.User;
-import com.example.recipeinator.neu.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseAdapter databaseAdapter;
@@ -29,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.register_email);
         password = findViewById(R.id.register_password);
     }
-    public void onCreateAccountPressed(View view){
+    public void createAccount(View view){
         String nick = nickname.getText().toString();
         String fullname = name.getText().toString();
         String mail = email.getText().toString();
@@ -41,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         databaseAdapter.addNewUser(user);
         startActivity(new Intent(this, HomeActivity.class));
     }
-    public void onAlreadyAMemberClicked(View view){
+    public void alreadyMember(View view){
         startActivity(new Intent(this, LoginActivity.class));
     }
 }
