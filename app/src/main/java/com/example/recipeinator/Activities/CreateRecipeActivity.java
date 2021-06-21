@@ -99,11 +99,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 recipe.addIngredient(ingredient, Integer.parseInt(count), unit);
             }
         }
-        database.recipeDao().insertAll(recipe);
-        Snackbar.make(findViewById(android.R.id.content), "Successfully Added", Snackbar.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, RecipeDetailActivity.class);
-        intent.putExtra("RECIPE_ID", recipe.id);
-        startActivity(intent);
+        try {
+            database.recipeDao().insertAll(recipe);
+            Intent intent = new Intent(this, RecipeDetailActivity.class);
+            intent.putExtra("RECIPE_ID", recipe.id);
+            startActivity(intent);
+        } catch (Exception e) {
+            Snackbar.make(findViewById(android.R.id.content), "Failed to add recipe!", Snackbar.LENGTH_LONG).show();
+        }
     }
 }
