@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Recipe-inator.iml" filepath="$PROJECT_DIR$/.idea/Recipe-inator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Recipeinator.iml" filepath="$PROJECT_DIR$/.idea/modules/Recipeinator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Recipeinator.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Recipeinator.app.iml" />
     </modules>
   </component>
 </project>

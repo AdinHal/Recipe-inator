@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Recipeinator</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="random">Random</string>
+    <string name="groceries">Groceries</string>
+    <string name="profile">Profile</string>
+    <string name="unit">Unit</string>
+    <string name="amount">Amount</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="recipe">Recipe</string>
+    <string name="preparation_time">Preparation Time</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="recipes">Recipes</string>
+    <string name="recipe_picture">Recipe Picture</string>
+    <string name="picture">Picture</string>
+    <string name="select">Select</string>
+    <string name="min">min</string>
 </resources>
