@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recipeinator.Activities.GroceryListActivity;
 import com.example.recipeinator.Activities.HomeActivity;
 import com.example.recipeinator.Activities.ProfileActivity;
-import com.example.recipeinator.Activities.RandomActivity;
+import com.example.recipeinator.Activities.CreateRecipeActivity;
 import com.example.recipeinator.Activities.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,8 +28,8 @@ public class BottomNavbarListener implements BottomNavigationView.OnNavigationIt
             intent = new Intent(activity, HomeActivity.class);
         } else if (itemId == R.id.page_search) {
             intent = new Intent(activity, SearchActivity.class);
-        } else if (itemId == R.id.page_random) {
-            intent = new Intent(activity, RandomActivity.class);
+        } else if (itemId == R.id.page_recipes) {
+            intent = new Intent(activity, CreateRecipeActivity.class);
         } else if (itemId == R.id.page_list) {
             intent = new Intent(activity, GroceryListActivity.class);
         } else if (itemId == R.id.page_profile) {

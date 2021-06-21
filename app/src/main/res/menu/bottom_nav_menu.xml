@@ -11,10 +11,10 @@
         android:icon="@drawable/lupe"
         android:title="@string/search"/>
     <item
-        android:id="@+id/page_random"
+        android:id="@+id/page_recipes"
         android:enabled="true"
-        android:icon="@drawable/ic_outline_casino_24"
-        android:title="@string/random"/>
+        android:icon="@drawable/ic_baseline_receipt_long_24"
+        android:title="@string/recipes"/>
     <item
         android:id="@+id/page_list"
         android:enabled="true"
