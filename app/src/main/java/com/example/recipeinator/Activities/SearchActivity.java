@@ -69,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
         searchResults.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE);
         adapter.filter(query);
         if (adapter.getItemCount() == 0 && !query.isEmpty()) {
-            Snackbar.make(findViewById(android.R.id.content), "No Results", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content), R.string.no_results, Snackbar.LENGTH_LONG).show();
         }
     }
 }

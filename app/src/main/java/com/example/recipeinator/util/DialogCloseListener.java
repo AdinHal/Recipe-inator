@@ -1,4 +1,4 @@
-package com.example.recipeinator;
+package com.example.recipeinator.util;
 
 import android.content.DialogInterface;
 

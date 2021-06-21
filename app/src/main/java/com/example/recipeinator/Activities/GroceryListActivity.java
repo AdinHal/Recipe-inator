@@ -14,7 +14,7 @@ import com.example.recipeinator.Adapters.GroceriesAdapter;
 import com.example.recipeinator.AddNewItem;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
-import com.example.recipeinator.DialogCloseListener;
+import com.example.recipeinator.util.DialogCloseListener;
 import com.example.recipeinator.R;
 import com.example.recipeinator.RecyclerItemTouchHelper;
 import com.example.recipeinator.models.Groceries;

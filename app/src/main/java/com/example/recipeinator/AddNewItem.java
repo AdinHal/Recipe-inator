@@ -16,6 +16,7 @@ import android.widget.EditText;
 import androidx.core.content.ContextCompat;
 
 import com.example.recipeinator.models.Groceries;
+import com.example.recipeinator.util.DialogCloseListener;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class AddNewItem extends BottomSheetDialogFragment {

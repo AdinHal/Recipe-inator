@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipeinator</string>
+    <string name="app_name">Recipe-inator</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="random">Random</string>
@@ -18,4 +18,22 @@
     <string name="min">min</string>
     <string name="ingredients">Ingredients:</string>
     <string name="preparation_time_parametrized">Preparation Time: %1$d min</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="delete_warning">Are you sure you want to delete this item?</string>
+    <string name="confirm">Confirm</string>
+    <string name="fail_add_recipe">Failed to add recipe!</string>
+    <string name="login_fail">False input. Try again!</string>
+    <string name="no_results">No Results</string>
+    <string name="groceries_list">Groceries List</string>
+    <string name="log_in">Log In</string>
+    <string name="email">Email</string>
+    <string name="create_an_account_here">Create a new account</string>
+    <string name="or">or</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="already_a_member_log_in_now">Already a member? Log in now</string>
+    <string name="enter_the_item_you_need">Enter the item you need</string>
+    <string name="save">Save</string>
 </resources>

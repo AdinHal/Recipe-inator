@@ -106,7 +106,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
             intent.putExtra("RECIPE_ID", recipe.id);
             startActivity(intent);
         } catch (Exception e) {
-            Snackbar.make(findViewById(android.R.id.content), "Failed to add recipe!", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content), R.string.fail_add_recipe, Snackbar.LENGTH_LONG).show();
         }
     }
 }

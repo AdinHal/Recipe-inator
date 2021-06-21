@@ -1,6 +1,5 @@
 package com.example.recipeinator;
 
-
 import android.app.AlertDialog;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,9 +33,9 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         final int position = viewHolder.getAdapterPosition();
         if(direction == ItemTouchHelper.LEFT){
             AlertDialog.Builder builder = new AlertDialog.Builder(adapter.getContext());
-            builder.setTitle("Delete Item");
-            builder.setMessage("Are You sure You want to delte this item?");
-            builder.setPositiveButton("Confirm", (dialog, which) -> adapter.deleteItem(position));
+            builder.setTitle(R.string.delete_item);
+            builder.setMessage(R.string.delete_warning);
+            builder.setPositiveButton(R.string.confirm, (dialog, which) -> adapter.deleteItem(position));
             builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> adapter.notifyItemChanged(viewHolder.getAdapterPosition()));
             AlertDialog dialog = builder.create();
             dialog.show();

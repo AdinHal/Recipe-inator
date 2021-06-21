@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             // launches HomeActivity (no flags needed) and calls finish() on itself.
             finish();
         } else {
-            Toast.makeText(this, "False input. Try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.login_fail, Toast.LENGTH_SHORT).show();
         }
     }
 
