@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_time"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_picture"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
@@ -62,9 +62,33 @@
         android:ems="10"
         android:inputType="number"
         android:hint="@string/preparation_time"
-        app:layout_constraintEnd_toEndOf="@+id/recipe_name"
+        app:layout_constraintEnd_toStartOf="@+id/minute"
         app:layout_constraintStart_toStartOf="@+id/recipe_name"
         app:layout_constraintTop_toBottomOf="@+id/recipe_name" />
+
+    <TextView
+        android:id="@+id/minute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/min"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/preparation_time"
+        app:layout_constraintEnd_toEndOf="@id/recipe_name"
+        app:layout_constraintStart_toEndOf="@id/preparation_time" />
+
+    <EditText
+        android:id="@+id/recipe_picture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="@string/picture"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/preparation_time"
+        app:layout_constraintTop_toBottomOf="@+id/preparation_time"
+        app:layout_constraintEnd_toStartOf="@id/picture_preview"/>
 
     <Button
         android:id="@+id/create_recipe"
@@ -75,5 +99,28 @@
         android:text="@string/save_recipe"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navbar"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/select_recipe_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/recipe_picture"
+        app:layout_constraintStart_toEndOf="@id/picture_preview"/>
+
+    <ImageView
+        android:id="@+id/picture_preview"
+        android:layout_width="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recipe_picture"
+        app:layout_constraintEnd_toStartOf="@+id/select_recipe_picture"
+        app:layout_constraintStart_toEndOf="@+id/recipe_picture"
+        app:layout_constraintTop_toTopOf="@+id/recipe_picture" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

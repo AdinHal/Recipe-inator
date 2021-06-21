@@ -15,6 +15,7 @@ public class Recipe {
     @ColumnInfo(name = "recipe_id") public int id;
     @ColumnInfo(name = "name") public String name;
     @ColumnInfo(name = "preparation_time") public int preparationTime;
+    @ColumnInfo(name = "picture_uri") public String pictureUri;
     @Ignore private List<MeasuredIngredient> ingredients = new ArrayList<>();
 
     public Recipe(){
