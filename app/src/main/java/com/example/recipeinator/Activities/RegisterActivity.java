@@ -1,4 +1,4 @@
-package com.example.recipeinator.neu;
+package com.example.recipeinator.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,13 +6,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
-import com.example.recipeinator.Activities.HomeActivity;
+import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
-    private DatabaseAdapter databaseAdapter;
+    private AppDatabase database;
     private EditText nickname, name, email, password;
 
     @Override
@@ -20,8 +21,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Assigning values
-        databaseAdapter = DatabaseAdapter.getInstance(this);
+        database = Room.databaseBuilder(
+                getApplicationContext(),
+                AppDatabase.class,
+                "database"
+        ).allowMainThreadQueries().build();
+
         nickname = findViewById(R.id.register_nickname);
         name = findViewById(R.id.register_name);
         email = findViewById(R.id.register_email);
@@ -35,11 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
         String pw = password.getText().toString();
 
         // Calling registerUser and creating a new User with the strings above
-        registerUser(new User(nick,fullname,mail,pw));
+        registerUser(new User(nick, fullname, mail, pw));
     }
     public void registerUser(User user){
         // Adding the new user to the database
-        databaseAdapter.addNewUser(user);
+        database.userDao().insertAll(user);
         startActivity(new Intent(this, HomeActivity.class));
     }
 

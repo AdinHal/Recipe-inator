@@ -1,12 +1,23 @@
 package com.example.recipeinator.models;
 
-public class User {
-    private int id;
-    private String nickname;
-    private String name;
-    private String email;
-    private String password;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity
+public class User {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "user_id") public int id;
+    @ColumnInfo(name = "nickname") public String nickname;
+    @ColumnInfo(name = "name") public String name;
+    @ColumnInfo(name = "email") public String email;
+    @ColumnInfo(name = "password") public String password;
+
+    public User(){
+    }
+
+    @Ignore
     public User(String nickname, String name, String email, String password){
         this.nickname=nickname;
         this.name=name;
@@ -14,48 +25,9 @@ public class User {
         this.password=password;
     }
 
+    @Ignore
     public User(int id, String nickname, String name, String email, String password){
         this(nickname,name,email,password);
         this.id=id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

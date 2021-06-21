@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipeinator.neu.LoginActivity;
+import com.example.recipeinator.Activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
