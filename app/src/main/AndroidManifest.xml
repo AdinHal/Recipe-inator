@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recipeinator">
         <activity android:name=".Activities.SearchActivity"/>
+        <activity android:name=".Activities.RecipeDetailActivity"/>
         <activity android:name=".Activities.GroceryListActivity"/>
         <activity android:name=".Activities.ProfileActivity"/>
         <activity android:name=".Activities.CreateRecipeActivity"/>

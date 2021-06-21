@@ -16,4 +16,6 @@
     <string name="picture">Picture</string>
     <string name="select">Select</string>
     <string name="min">min</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="preparation_time_parametrized">Preparation Time: %1$d min</string>
 </resources>
