@@ -1,4 +1,4 @@
-package com.example.recipeinator.Activities;
+package com.example.recipeinator.neu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipeinator.Adapters.DatabaseAdapter;
+import com.example.recipeinator.Activities.HomeActivity;
 import com.example.recipeinator.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //TODO: databaseAdapter = DatabaseAdapter.getInstance(this);
+        databaseAdapter = DatabaseAdapter.getInstance(this);
 
         email = findViewById(R.id.register_email);
         password = findViewById(R.id.login_password);
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         
         
          if(state){
-          Intent intent = new Intent(this,HomeActivity.class);
+          Intent intent = new Intent(this, HomeActivity.class);
           intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
           startActivity(intent);
           finish();
@@ -54,6 +54,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onCreateAccountClicked(View view){
-        startActivity(new Intent(this,RegisterActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }

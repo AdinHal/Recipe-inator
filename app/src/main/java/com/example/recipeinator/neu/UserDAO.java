@@ -1,4 +1,4 @@
-package com.example.recipeinator.dao;
+package com.example.recipeinator.neu;
 
 import android.content.ContentValues;
 import android.database.Cursor;

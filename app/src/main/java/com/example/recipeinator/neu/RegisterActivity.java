@@ -1,16 +1,17 @@
-package com.example.recipeinator.Activities;
+package com.example.recipeinator.neu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipeinator.Adapters.DatabaseAdapter;
+import com.example.recipeinator.Activities.HomeActivity;
+import com.example.recipeinator.neu.DatabaseAdapter;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.User;
+import com.example.recipeinator.neu.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseAdapter databaseAdapter;
@@ -21,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //TODO:databaseAdapter = DataBaseAdapter.getInstance(this);
+        databaseAdapter = DatabaseAdapter.getInstance(this);
 
         nickname = findViewById(R.id.register_nickname);
         name = findViewById(R.id.register_name);
@@ -37,10 +38,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerUser(new User(nick,fullname,mail,pw));
     }
     public void registerUser(User user){
-       //databaseAdapter.addNewUser(user);
-        startActivity(new Intent(this,HomeActivity.class));
+        databaseAdapter.addNewUser(user);
+        startActivity(new Intent(this, HomeActivity.class));
     }
     public void onAlreadyAMemberClicked(View view){
-        startActivity(new Intent(this,LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

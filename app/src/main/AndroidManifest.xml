@@ -15,8 +15,8 @@
         <activity android:name=".Activities.ProfileActivity"/>
         <activity android:name=".Activities.CreateRecipeActivity"/>
         <activity android:name=".Activities.HomeActivity"/>
-        <activity android:name=".Activities.LoginActivity"/>
-        <activity android:name=".Activities.RegisterActivity"/>
+        <activity android:name=".neu.LoginActivity"/>
+        <activity android:name=".neu.RegisterActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
