@@ -10,6 +10,7 @@
         android:layout_width="320dp"
         android:layout_height="58dp"
         android:fontFamily="@font/montserrat_bold"
+        android:onClick="onCreateAccountPressed"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

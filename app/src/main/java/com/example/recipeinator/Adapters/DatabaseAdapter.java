@@ -9,6 +9,7 @@ public class DatabaseAdapter {
     private static DatabaseAdapter instance;
     private UserDAO userDAO;
 
+
     public boolean signIn(String email, String password){
         User current = userDAO.getUserByEmailAndPassword(email,password);
         return current!=null;

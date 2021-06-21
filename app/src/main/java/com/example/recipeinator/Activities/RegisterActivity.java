@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_register);
         //TODO:databaseAdapter = DataBaseAdapter.getInstance(this);
 
         nickname = findViewById(R.id.register_nickname);
@@ -37,13 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerUser(new User(nick,fullname,mail,pw));
     }
     public void registerUser(User user){
-       databaseAdapter.addNewUser(user);
-
-        Intent intent = new Intent(this,HomeActivity.class);
-        startActivity(intent);
+       //databaseAdapter.addNewUser(user);
+        startActivity(new Intent(this,HomeActivity.class));
     }
     public void onAlreadyAMemberClicked(View view){
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this,LoginActivity.class));
     }
 }

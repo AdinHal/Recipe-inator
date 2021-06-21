@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipeinator.Activities.HomeActivity;
+import com.example.recipeinator.Activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        final Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         new Handler().postDelayed(() -> startActivity(intent), 1700);
     }
 }
