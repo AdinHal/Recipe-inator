@@ -8,11 +8,12 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recipeinator.Adapters.DatabaseAdapter;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
-    //TODO: private DatabaseAdapter databaseAdapter;
+    private DatabaseAdapter databaseAdapter;
 
     private EditText nickname, name, email, password;
 
@@ -20,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        //TODO: databaseAdapter = DatabaseAdapter.getInstance(this);
+        //TODO:databaseAdapter = DataBaseAdapter.getInstance(this);
 
         nickname = findViewById(R.id.register_nickname);
         name = findViewById(R.id.register_name);
@@ -36,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerUser(new User(nick,fullname,mail,pw));
     }
     public void registerUser(User user){
-        //TODO: databaseAdapter.addNewUser(user);
+       databaseAdapter.addNewUser(user);
 
         Intent intent = new Intent(this,HomeActivity.class);
         startActivity(intent);

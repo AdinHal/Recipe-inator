@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recipeinator.Adapters.DatabaseAdapter;
 import com.example.recipeinator.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -15,8 +16,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout email,password;
 
-    //TODO
-    // private DatabaseAdapter databaseAdapter; Hier sollte das sein, ich weiß nich wie es mit Room fukntioniert :)
+
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -39,8 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     
     private void loginUser(String email, String password){
-        boolean state=true; // Delete when databaseAdapter is finished
-      //TODO:  boolean state = databaseAdapter.signIn(email,password)
+        boolean state = databaseAdapter.signIn(email,password);
         
         
          if(state){
