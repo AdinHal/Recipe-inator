@@ -317,6 +317,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/main_searchbar" />
 

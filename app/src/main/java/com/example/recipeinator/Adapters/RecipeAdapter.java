@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.Recipe;
+import com.example.recipeinator.util.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,11 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private final List<Recipe> recipes;
     private final List<Recipe> filteredRecipes = new ArrayList<>();
+    private final OnItemClickListener itemClickListener;
 
-    public RecipeAdapter(List<Recipe> recipes) {
+    public RecipeAdapter(List<Recipe> recipes, OnItemClickListener itemClickListener) {
         this.recipes = recipes;
+        this.itemClickListener = itemClickListener;
         filteredRecipes.addAll(recipes);
     }
 
@@ -51,6 +54,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         Recipe recipe = filteredRecipes.get(position);
         ((TextView) holder.itemView.findViewById(R.id.recipe_list_name)).setText(recipe.name);
         ((ImageView) holder.itemView.findViewById(R.id.recipe_list_picture)).setImageURI(Uri.parse(recipe.pictureUri));
+        holder.itemView.setOnClickListener(v -> itemClickListener.onItemClicked(recipe.id));
     }
 
     @Override
