@@ -3,6 +3,7 @@ package com.example.recipeinator.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
             result -> {
                 if (result.getData() != null) {
                     pictureUri = result.getData().getData();
+                    getContentResolver().takePersistableUriPermission(pictureUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     pictureName.setText(pictureUri.getLastPathSegment());
                     runOnUiThread(() -> imageView.setImageURI(result.getData().getData()));
                 }
@@ -74,14 +76,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
     }
 
     private void selectImage(){
-        Intent intent = new Intent(Intent.ACTION_PICK,
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         selectImageLauncher.launch(intent);
     }
 
     private void saveRecipe(){
-
         Recipe recipe = new Recipe(((EditText)findViewById(R.id.recipe_name)).getText().toString());
+        recipe.preparationTime = Integer.parseInt(((EditText) findViewById(R.id.preparation_time)).getText().toString());
         recipe.pictureUri = pictureUri.toString();
         for (int i = 0; i < adapter.getItemCount(); i++) {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
@@ -97,7 +99,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 recipe.addIngredient(ingredient, Integer.parseInt(count), unit);
             }
         }
-        database.recipeDao().insertAll(recipe);
-        Snackbar.make(findViewById(android.R.id.content), "Successfully Added", Snackbar.LENGTH_LONG).show();
+
+        try {
+            database.recipeDao().insertAll(recipe);
+            Intent intent = new Intent(this, RecipeDetailActivity.class);
+            intent.putExtra("RECIPE_ID", recipe.id);
+            startActivity(intent);
+        } catch (Exception e) {
+            Snackbar.make(findViewById(android.R.id.content), "Failed to add recipe!", Snackbar.LENGTH_LONG).show();
+        }
     }
 }
