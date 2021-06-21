@@ -1,0 +1,48 @@
+package com.example.recipeinator.Activities;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.recipeinator.R;
+import com.example.recipeinator.models.User;
+
+public class RegisterActivity extends AppCompatActivity {
+    //TODO: private DatabaseAdapter databaseAdapter;
+
+    private EditText nickname, name, email, password;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+
+        //TODO: databaseAdapter = DatabaseAdapter.getInstance(this);
+
+        nickname = findViewById(R.id.register_nickname);
+        name = findViewById(R.id.register_name);
+        email = findViewById(R.id.register_email);
+        password = findViewById(R.id.register_password);
+    }
+    public void onCreateAccountPressed(View view){
+        String nick = nickname.getText().toString();
+        String fullname = name.getText().toString();
+        String mail = email.getText().toString();
+        String pw = password.getText().toString();
+
+        registerUser(new User(nick,fullname,mail,pw));
+    }
+    public void registerUser(User user){
+        //TODO: databaseAdapter.addNewUser(user);
+
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
+    }
+    public void onAlreadyAMemberClicked(View view){
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+    }
+}
