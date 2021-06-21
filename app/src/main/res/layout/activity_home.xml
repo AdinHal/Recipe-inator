@@ -75,19 +75,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.249" />
 
-            <SearchView
-                android:id="@+id/main_searchbar"
-                android:layout_width="327dp"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_gray_rounded"
-                android:submitBackground="@drawable/bg_gray_rounded"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.166"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.628" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
