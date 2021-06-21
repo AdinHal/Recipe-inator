@@ -2,23 +2,14 @@ package com.example.recipeinator.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.NumberPicker;
+import android.widget.Spinner;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,18 +20,11 @@ import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.Ingredient;
-import com.example.recipeinator.models.MeasuredIngredient;
 import com.example.recipeinator.models.Recipe;
-import com.example.recipeinator.models.RecipeIngredients;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class RandomActivity extends AppCompatActivity {
+public class CreateRecipeActivity extends AppCompatActivity {
     private RecipeIngredientsAdapter adapter;
     private RecyclerView recyclerView;
     private Uri pictureUri;
@@ -61,7 +45,7 @@ public class RandomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_random);
+        setContentView(R.layout.activity_create_recipe);
 
         database = Room.databaseBuilder(
                 this,
@@ -104,7 +88,7 @@ public class RandomActivity extends AppCompatActivity {
             if (viewHolder != null){
                 String ingredientName = ((EditText) viewHolder.itemView.findViewById(R.id.ingredient)).getText().toString();
                 String count = ((EditText) viewHolder.itemView.findViewById(R.id.count)).getText().toString();
-                String unit = ((EditText) viewHolder.itemView.findViewById(R.id.unit)).getText().toString();
+                String unit = ((Spinner) viewHolder.itemView.findViewById(R.id.unit)).getSelectedItem().toString();
                 Ingredient ingredient = database.ingredientDao().getByName(ingredientName);
                 if (ingredient == null){
                     ingredient = new Ingredient(ingredientName);
