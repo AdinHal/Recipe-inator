@@ -47,6 +47,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         TextView instructions = findViewById(R.id.recipe_detail_instructions);
         instructions.setText(recipe.instructions);
 
+        TextView category = findViewById(R.id.recipe_detail_category);
+        category.setText(getString(R.string.category_parametrized, recipe.getCategory().name));
+
         TextView time = findViewById(R.id.recipe_detail_preparation_time);
         time.setText(getString(R.string.preparation_time_parametrized, recipe.preparationTime));
 

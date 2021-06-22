@@ -7,7 +7,7 @@ import androidx.room.Relation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeIngredients {
+public class RecipeWithIngredients {
     @Embedded
     public Recipe recipe;
     @Relation(

@@ -3,6 +3,7 @@ package com.example.recipeinator.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,11 +21,14 @@ import com.example.recipeinator.Adapters.RecipeIngredientsAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
+import com.example.recipeinator.models.Category;
 import com.example.recipeinator.util.RecyclerItemDelete;
 import com.example.recipeinator.models.Ingredient;
 import com.example.recipeinator.models.Recipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class CreateRecipeActivity extends AppCompatActivity {
     private RecipeIngredientsAdapter adapter;
@@ -77,8 +81,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemDelete(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
-//        ImageView addIngredient = findViewById(R.id.add_ingredient);
-//        addIngredient.setOnClickListener(v -> adapter.addItem());
+
+        Spinner categorySpinner = findViewById(R.id.recipe_category);
+
+        List<Category> categories = database.categoryDao().getAll();
+        ArrayAdapter<Category> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
 
         imageView = findViewById(R.id.picture_preview);
         pictureName = findViewById(R.id.recipe_picture);
@@ -97,6 +107,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         recipe.preparationTime = Integer.parseInt(((EditText) findViewById(R.id.preparation_time)).getText().toString());
         recipe.instructions = ((EditText) findViewById(R.id.recipe_instructions)).getText().toString();
         recipe.description = ((EditText) findViewById(R.id.recipe_description)).getText().toString();
+        recipe.categoryId = ((Category)((Spinner) findViewById(R.id.recipe_category)).getSelectedItem()).id;
         recipe.pictureUri = pictureUri.toString();
         for (int i = 0; i < adapter.getItemCount(); i++) {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
