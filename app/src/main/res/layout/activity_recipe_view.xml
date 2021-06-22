@@ -32,6 +32,17 @@
             app:layout_constraintTop_toBottomOf="@+id/recipe_detail_picture" />
 
         <TextView
+            android:id="@+id/recipe_detail_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Category: Main Course"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_description" />
+
+        <TextView
             android:id="@+id/recipe_detail_preparation_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +51,7 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Preparation Time: 10 min"
-            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_description" />
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_category" />
 
         <ListView
             android:id="@+id/recipe_detail_ingredients"

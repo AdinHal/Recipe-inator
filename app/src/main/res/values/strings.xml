@@ -38,4 +38,6 @@
     <string name="save">Save</string>
     <string name="description">Description</string>
     <string name="instructions">Instructions:</string>
+    <string name="category">Category</string>
+    <string name="category_parametrized">Category: %1$s</string>
 </resources>
