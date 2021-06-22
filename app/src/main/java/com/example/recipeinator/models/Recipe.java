@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(indices={@Index(value="name", unique=true)})
+@Entity
 public class Recipe {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "recipe_id") public int id;
@@ -18,7 +18,10 @@ public class Recipe {
     @ColumnInfo(name = "preparation_time") public int preparationTime;
     @ColumnInfo(name = "picture_uri") public String pictureUri;
     @ColumnInfo(name = "instructions") public String instructions;
+    @ColumnInfo(name = "category_id") public int categoryId;
+
     @Ignore private List<MeasuredIngredient> ingredients = new ArrayList<>();
+    @Ignore private Category category;
 
     public Recipe(){
     }
@@ -46,12 +49,11 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", preparationTime=" + preparationTime +
-                '}';
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Category getCategory(){
+        return category;
     }
 }
