@@ -63,6 +63,7 @@
             tools:listitem="@android:layout/simple_list_item_activated_2" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/text_ingredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +72,17 @@
             android:text="@string/ingredients"
             app:layout_constraintStart_toStartOf="@+id/recipe_detail_preparation_time"
             app:layout_constraintTop_toBottomOf="@+id/recipe_detail_preparation_time" />
+
+        <TextView
+            android:id="@+id/someother"
+            android:layout_width="match_parent"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_name"
+            tools:text="This is an example description" />
 
         <TextView
             android:id="@+id/recipe_detail_description"
@@ -88,7 +100,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="@color/black"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
@@ -98,6 +109,7 @@
             tools:text="1. First do this.\n\n2. Then do that\n\n3. finished" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/instructions_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
