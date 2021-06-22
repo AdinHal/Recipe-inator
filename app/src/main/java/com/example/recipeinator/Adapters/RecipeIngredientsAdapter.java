@@ -1,10 +1,13 @@
 package com.example.recipeinator.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,14 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.Ingredient;
+import com.example.recipeinator.util.SwipeableAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredientsAdapter.ViewHolder> {
+public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredientsAdapter.ViewHolder> implements SwipeableAdapter {
     private int count = 1;
+    private Context context;
 
-    public RecipeIngredientsAdapter(AppDatabase database){
+    public RecipeIngredientsAdapter(AppDatabase database, Context context){
+        this.context = context;
         ViewHolder.ingredientNames = new ArrayList<>();
         List<Ingredient> ingredients = database.ingredientDao().getAll();
         for (Ingredient ingredient: ingredients){
@@ -46,7 +52,37 @@ public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredi
 
     public void addItem(){
         count++;
-        notifyDataSetChanged();
+        notifyItemInserted(count - 1);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull RecipeIngredientsAdapter.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+
+        ((EditText) holder.itemView.findViewById(R.id.ingredient)).setText("");
+        ((EditText) holder.itemView.findViewById(R.id.count)).setText("");
+        ((Spinner) holder.itemView.findViewById(R.id.unit)).setSelection(0);
+    }
+
+    @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
+    public void editItem(int position) {
+        notifyItemChanged(position);
+    }
+
+    @Override
+    public void deleteItem(int position) {
+        count--;
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public boolean requiresConfirmation() {
+        return false;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

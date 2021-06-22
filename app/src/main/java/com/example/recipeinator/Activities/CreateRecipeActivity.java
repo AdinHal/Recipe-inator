@@ -3,7 +3,6 @@ package com.example.recipeinator.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +11,7 @@ import android.widget.Spinner;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -20,6 +20,7 @@ import com.example.recipeinator.Adapters.RecipeIngredientsAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
+import com.example.recipeinator.util.RecyclerItemDelete;
 import com.example.recipeinator.models.Ingredient;
 import com.example.recipeinator.models.Recipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -63,11 +64,21 @@ public class CreateRecipeActivity extends AppCompatActivity {
         createRecipe.setOnClickListener(v -> saveRecipe());
 
         recyclerView = findViewById(R.id.ingredient_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecipeIngredientsAdapter(database);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        adapter = new RecipeIngredientsAdapter(database, this);
         recyclerView.setAdapter(adapter);
         ImageView addIngredient = findViewById(R.id.add_ingredient);
         addIngredient.setOnClickListener(v -> adapter.addItem());
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemDelete(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+//        ImageView addIngredient = findViewById(R.id.add_ingredient);
+//        addIngredient.setOnClickListener(v -> adapter.addItem());
 
         imageView = findViewById(R.id.picture_preview);
         pictureName = findViewById(R.id.recipe_picture);
@@ -84,6 +95,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private void saveRecipe(){
         Recipe recipe = new Recipe(((EditText)findViewById(R.id.recipe_name)).getText().toString());
         recipe.preparationTime = Integer.parseInt(((EditText) findViewById(R.id.preparation_time)).getText().toString());
+        recipe.instructions = ((EditText) findViewById(R.id.recipe_instructions)).getText().toString();
+        recipe.description = ((EditText) findViewById(R.id.recipe_description)).getText().toString();
         recipe.pictureUri = pictureUri.toString();
         for (int i = 0; i < adapter.getItemCount(); i++) {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);

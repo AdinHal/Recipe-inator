@@ -36,4 +36,6 @@
     <string name="already_a_member_log_in_now">Already a member? Log in now</string>
     <string name="enter_the_item_you_need">Enter the item you need</string>
     <string name="save">Save</string>
+    <string name="description">Description</string>
+    <string name="instructions">Instructions:</string>
 </resources>

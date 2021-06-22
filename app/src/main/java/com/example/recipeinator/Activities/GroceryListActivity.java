@@ -14,9 +14,10 @@ import com.example.recipeinator.Adapters.GroceriesAdapter;
 import com.example.recipeinator.AddNewItem;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
+import com.example.recipeinator.util.RecyclerItemDelete;
+import com.example.recipeinator.util.RecyclerItemEdit;
 import com.example.recipeinator.util.DialogCloseListener;
 import com.example.recipeinator.R;
-import com.example.recipeinator.RecyclerItemTouchHelper;
 import com.example.recipeinator.models.Groceries;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -54,7 +55,9 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
 
         ImageView floatingActionButton = findViewById(R.id.grocerylist_addbutton);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(groceriesAdapter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemEdit(groceriesAdapter));
+        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
+        itemTouchHelper = new ItemTouchHelper(new RecyclerItemDelete(groceriesAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
         groceriesList = database.groceriesDao().getAllItems();

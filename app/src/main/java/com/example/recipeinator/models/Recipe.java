@@ -14,8 +14,10 @@ public class Recipe {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "recipe_id") public int id;
     @ColumnInfo(name = "name") public String name;
+    @ColumnInfo(name = "description") public String description;
     @ColumnInfo(name = "preparation_time") public int preparationTime;
     @ColumnInfo(name = "picture_uri") public String pictureUri;
+    @ColumnInfo(name = "instructions") public String instructions;
     @Ignore private List<MeasuredIngredient> ingredients = new ArrayList<>();
 
     public Recipe(){

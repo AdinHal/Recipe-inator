@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipeinator.Activities.GroceryListActivity;
 import com.example.recipeinator.models.Groceries;
+import com.example.recipeinator.util.SwipeableAdapter;
 
 import java.util.List;
 
-public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.ViewHolder> {
+public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.ViewHolder> implements SwipeableAdapter {
 
     private List<Groceries> groceriesList;
     private GroceryListActivity activity;
@@ -62,6 +63,11 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
         groceriesList.remove(position);
         notifyItemRemoved(position);
 
+    }
+
+    @Override
+    public boolean requiresConfirmation() {
+        return true;
     }
 
     public void editItem(int position){

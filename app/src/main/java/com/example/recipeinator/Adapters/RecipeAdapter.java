@@ -53,6 +53,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder holder, int position) {
         Recipe recipe = filteredRecipes.get(position);
         ((TextView) holder.itemView.findViewById(R.id.recipe_list_name)).setText(recipe.name);
+        ((TextView) holder.itemView.findViewById(R.id.recipe_list_description)).setText(recipe.description);
         ((ImageView) holder.itemView.findViewById(R.id.recipe_list_picture)).setImageURI(Uri.parse(recipe.pictureUri));
         holder.itemView.setOnClickListener(v -> itemClickListener.onItemClicked(recipe.id));
     }
