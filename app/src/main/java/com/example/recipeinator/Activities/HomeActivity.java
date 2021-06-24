@@ -19,15 +19,5 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_home);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
-
-        ImageView tester = findViewById(R.id.timertest);
-
-        tester.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),TimerActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
