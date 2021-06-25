@@ -28,6 +28,7 @@ public class AddNewItem extends BottomSheetDialogFragment {
     private Groceries groceries;
 
     public AddNewItem(){
+        this.database = AppDatabase.getInstance();
     }
 
     public AddNewItem(Groceries groceries){
