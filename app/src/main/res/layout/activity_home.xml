@@ -16,7 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="94dp"
+            android:layout_marginBottom="30dp">
 
             <TextView
                 android:id="@+id/textView"
@@ -59,9 +60,113 @@
                 app:layout_constraintHorizontal_bias="0.04"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.238" />
+                app:layout_constraintVertical_bias="0.709" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/horisontalscrolltop"
+            android:layout_width="fill_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_height="140dp"
+            android:fillViewport="true"
+            android:measureAllChildren="false"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/innerTop"
+                android:layout_width="489px"
+                android:layout_height="750px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                android:id="@+id/firstHorizontalRectangle"
+                android:layout_width="535px"
+                android:layout_height="905px"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/horizontalRectangle1"
+                        android:layout_width="905px"
+                        android:layout_height="489px"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/hor1" />
+                </RelativeLayout>
+
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/secondHorizontalRectangle"
+                    android:layout_width="535px"
+                    android:layout_height="905px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/horizontalRectangle2"
+                            android:layout_width="905px"
+                            android:layout_height="489px"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/hor2" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/thirdHorizontalRectangle"
+                    android:layout_width="535px"
+                    android:layout_height="905px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/horizontalRectangle3"
+                            android:layout_width="905px"
+                            android:layout_height="489px"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/hor3" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/fourthHorizontalRectangle"
+                    android:layout_width="535px"
+                    android:layout_height="905px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/horizontalRectangle4"
+                            android:layout_width="905px"
+                            android:layout_height="489px"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/hor4" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/fifthHorizontalRectangle"
+                    android:layout_width="535px"
+                    android:layout_height="905px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/horizontalRectangle5"
+                            android:layout_width="905px"
+                            android:layout_height="489px"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/hor5" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 
     <HorizontalScrollView
