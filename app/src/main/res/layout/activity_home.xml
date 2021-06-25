@@ -100,14 +100,6 @@
                         android:src="@drawable/rectanglemain1" />
 
                     <ImageView
-                        android:id="@+id/imgcheesehamtoast"
-                        android:layout_width="179dp"
-                        android:layout_height="197dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="-32dp"
-                        android:src="@drawable/cheesehamtoast" />
-
-                    <ImageView
                         android:id="@+id/mealsize1"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -208,15 +200,6 @@
                         android:src="@drawable/rectangle2" />
 
                     <ImageView
-                        android:id="@+id/imgChickenRice"
-                        android:layout_width="179dp"
-                        android:layout_height="197dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="-47dp"
-                        android:src="@drawable/chickenrice" />
-
-                    <ImageView
                         android:id="@+id/mealsize2"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -315,15 +298,6 @@
                         android:layout_width="489px"
                         android:layout_height="905px"
                         android:src="@drawable/rectangle3" />
-
-                    <ImageView
-                        android:id="@+id/imgveggieburger"
-                        android:layout_width="179dp"
-                        android:layout_height="197dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="-50dp"
-                        android:src="@drawable/veggieburger" />
 
                     <TextView
                         android:id="@+id/veggieburger"
