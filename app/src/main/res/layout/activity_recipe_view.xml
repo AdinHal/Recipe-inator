@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_ingredients"
-            tools:listitem="@android:layout/simple_list_item_activated_2" />
+            tools:listitem="@layout/generic_list_item_small" />
 
         <TextView
             android:textStyle="bold"
