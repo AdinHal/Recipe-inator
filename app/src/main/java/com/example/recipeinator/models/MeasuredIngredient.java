@@ -15,11 +15,6 @@ public class MeasuredIngredient extends Ingredient {
 
     @Override
     public String toString() {
-        return "MeasuredIngredient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", amount=" + amount +
-                ", unit='" + unit + '\'' +
-                '}';
+        return String.format("%s %s %s", amount, unit, name);
     }
 }

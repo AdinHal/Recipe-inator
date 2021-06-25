@@ -21,11 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        database = Room.databaseBuilder(
-                getApplicationContext(),
-                AppDatabase.class,
-                "database"
-        ).allowMainThreadQueries().build();
+        database = AppDatabase.getInstance();
 
         nickname = findViewById(R.id.register_nickname);
         name = findViewById(R.id.register_name);

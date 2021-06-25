@@ -39,18 +39,14 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
         bottomNavbar.setSelectedItemId(R.id.page_list);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
 
-        database = Room.databaseBuilder(
-            getApplicationContext(),
-            AppDatabase.class,
-            "database"
-        ).allowMainThreadQueries().build();
+        database = AppDatabase.getInstance();
 
         groceriesList = new ArrayList<>();
 
         RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecycleView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        groceriesAdapter = new GroceriesAdapter(database,this);
+        groceriesAdapter = new GroceriesAdapter(this);
         tasksRecyclerView.setAdapter(groceriesAdapter);
 
         ImageView floatingActionButton = findViewById(R.id.grocerylist_addbutton);
@@ -64,7 +60,7 @@ public class GroceryListActivity extends AppCompatActivity implements DialogClos
         Collections.reverse(groceriesList);
         groceriesAdapter.setTasks(groceriesList);
 
-        floatingActionButton.setOnClickListener(v -> new AddNewItem(database).show(getSupportFragmentManager(),AddNewItem.TAG));
+        floatingActionButton.setOnClickListener(v -> new AddNewItem().show(getSupportFragmentManager(),AddNewItem.TAG));
     }
 
 

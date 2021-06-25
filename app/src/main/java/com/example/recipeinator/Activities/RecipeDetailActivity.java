@@ -1,38 +1,48 @@
 package com.example.recipeinator.Activities;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.recipeinator.Adapters.RecyclerArrayAdapter;
 import com.example.recipeinator.AppDatabase;
+import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
+import com.example.recipeinator.fragments.TimerFragment;
 import com.example.recipeinator.models.MeasuredIngredient;
 import com.example.recipeinator.models.Recipe;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.recipeinator.models.UserRecipeCrossRef;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class RecipeDetailActivity extends AppCompatActivity {
+
+    private AppDatabase database;
+    private int recipeId;
+    private ImageView favorite;
+    private int userId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view);
 
-        AppDatabase database = Room.databaseBuilder(
-                getApplicationContext(),
-                AppDatabase.class,
-                "database"
-        ).allowMainThreadQueries().build();
-        int recipeId = getIntent().getIntExtra("RECIPE_ID", 0);
+        BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
+        bottomNavbar.setSelectedItemId(R.id.page_recipes);
+        bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
+
+        database = AppDatabase.getInstance();
+        recipeId = getIntent().getIntExtra("RECIPE_ID", 0);
+        userId = LoginActivity.getLoggedInUser().id;
         Recipe recipe = database.recipeDao().getById(recipeId);
 
         ImageView picture = findViewById(R.id.recipe_detail_picture);
@@ -53,13 +63,48 @@ public class RecipeDetailActivity extends AppCompatActivity {
         TextView time = findViewById(R.id.recipe_detail_preparation_time);
         time.setText(getString(R.string.preparation_time_parametrized, recipe.preparationTime));
 
-        List<MeasuredIngredient> ingredients = recipe.getIngredients();
-        List<String> ingredientStrings = new ArrayList<>();
-        for (MeasuredIngredient ingredient : ingredients){
-            ingredientStrings.add(String.format("%s %s %s", ingredient.amount, ingredient.unit, ingredient.name));
+        RecyclerArrayAdapter<MeasuredIngredient> adapter = new RecyclerArrayAdapter<>(R.layout.generic_list_item_small, recipe.getIngredients());
+        RecyclerView recyclerView = findViewById(R.id.recipe_detail_ingredients);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        TimerFragment fragment = new TimerFragment(recipe.preparationTime);
+        getSupportFragmentManager().beginTransaction().add(R.id.timer_frame, fragment).hide(fragment).commit();
+        findViewById(R.id.timer_button).setOnClickListener(v -> {
+            if (fragment.isVisible()) {
+                getSupportFragmentManager().beginTransaction().hide(fragment).commit();
+            } else {
+                getSupportFragmentManager().beginTransaction().show(fragment).commit();
+            }
+        });
+
+        favorite = findViewById(R.id.favorite_image);
+        favorite.setOnClickListener(v -> handleFavoriteClicked());
+        setFavoriteIcon(database.userDao().isUserFavoriteRecipe(userId, recipeId));
+    }
+
+    private void handleFavoriteClicked(){
+        if (database.userDao().isUserFavoriteRecipe(userId, recipeId)) {
+            database.userDao().deleteUserRecipes(new UserRecipeCrossRef(userId, recipeId));
+            Toast.makeText(this, "Removed Recipe from Favorites", Toast.LENGTH_LONG).show();
+            setFavoriteIcon(false);
+        } else {
+            database.userDao().insertUserRecipes(new UserRecipeCrossRef(userId, recipeId));
+            Toast.makeText(this, "Added Recipe to Favorites", Toast.LENGTH_LONG).show();
+            setFavoriteIcon(true);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredientStrings);
-        ListView listView = findViewById(R.id.recipe_detail_ingredients);
-        listView.setAdapter(adapter);
+    }
+
+    private void setFavoriteIcon(boolean isFavorite){
+        if (isFavorite) {
+            favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+        }
     }
 }

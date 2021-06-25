@@ -24,9 +24,9 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
     private GroceryListActivity activity;
     private AppDatabase database;
 
-    public GroceriesAdapter(AppDatabase database, GroceryListActivity activity){
+    public GroceriesAdapter(GroceryListActivity activity){
         this.activity=activity;
-        this.database = database;
+        this.database = AppDatabase.getInstance();
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -72,7 +72,7 @@ public class GroceriesAdapter extends RecyclerView.Adapter<GroceriesAdapter.View
 
     public void editItem(int position){
         Groceries item = groceriesList.get(position);
-        new AddNewItem(database, item).show(activity.getSupportFragmentManager(),AddNewItem.TAG);
+        new AddNewItem(item).show(activity.getSupportFragmentManager(),AddNewItem.TAG);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

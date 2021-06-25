@@ -30,12 +30,8 @@ public class AddNewItem extends BottomSheetDialogFragment {
     public AddNewItem(){
     }
 
-    public AddNewItem(AppDatabase database){
-        this.database = database;
-    }
-
-    public AddNewItem(AppDatabase database, Groceries groceries){
-        this.database = database;
+    public AddNewItem(Groceries groceries){
+        this.database = AppDatabase.getInstance();
         this.groceries = groceries;
     }
 

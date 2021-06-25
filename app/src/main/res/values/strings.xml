@@ -42,4 +42,13 @@
     <string name="category_parametrized">Category: %1$s</string>
     <string name="recipe_name">Recipe Name</string>
     <string name="instructions1">Instructions</string>
+    <string name="timer">Timer</string>
+    <string name="set">Set</string>
+    <string name="reset">Reset</string>
+    <string name="minutes">Minutes</string>
+    <string name="pause">Pause</string>
+    <string name="start">Start</string>
+    <string name="time_empty">Time can\'t be empty</string>
+    <string name="enter_positive">Enter a positive number</string>
+    <string name="favorite_recipes">Favorite Recipes</string>
 </resources>
