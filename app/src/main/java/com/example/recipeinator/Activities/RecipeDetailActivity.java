@@ -1,9 +1,7 @@
 package com.example.recipeinator.Activities;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -11,10 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.recipeinator.Adapters.RecyclerArrayAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
+import com.example.recipeinator.fragments.TimerFragment;
 import com.example.recipeinator.models.MeasuredIngredient;
 import com.example.recipeinator.models.Recipe;
 
@@ -53,13 +55,24 @@ public class RecipeDetailActivity extends AppCompatActivity {
         TextView time = findViewById(R.id.recipe_detail_preparation_time);
         time.setText(getString(R.string.preparation_time_parametrized, recipe.preparationTime));
 
-        List<MeasuredIngredient> ingredients = recipe.getIngredients();
-        List<String> ingredientStrings = new ArrayList<>();
-        for (MeasuredIngredient ingredient : ingredients){
-            ingredientStrings.add(String.format("%s %s %s", ingredient.amount, ingredient.unit, ingredient.name));
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingredientStrings);
-        ListView listView = findViewById(R.id.recipe_detail_ingredients);
-        listView.setAdapter(adapter);
+        RecyclerArrayAdapter<MeasuredIngredient> adapter = new RecyclerArrayAdapter<>(android.R.layout.simple_list_item_1, recipe.getIngredients());
+        RecyclerView recyclerView = findViewById(R.id.recipe_detail_ingredients);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        TimerFragment fragment = new TimerFragment(recipe.preparationTime);
+        getSupportFragmentManager().beginTransaction().add(R.id.timer_frame, fragment).hide(fragment).commit();
+        findViewById(R.id.timer_button).setOnClickListener(v -> {
+            if (fragment.isVisible()) {
+                getSupportFragmentManager().beginTransaction().hide(fragment).commit();
+            } else {
+                getSupportFragmentManager().beginTransaction().show(fragment).commit();
+            }
+        });
     }
 }
