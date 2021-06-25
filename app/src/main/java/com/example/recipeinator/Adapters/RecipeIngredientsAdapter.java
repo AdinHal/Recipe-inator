@@ -24,10 +24,10 @@ public class RecipeIngredientsAdapter extends RecyclerView.Adapter<RecipeIngredi
     private int count = 1;
     private Context context;
 
-    public RecipeIngredientsAdapter(AppDatabase database, Context context){
+    public RecipeIngredientsAdapter(Context context){
         this.context = context;
         ViewHolder.ingredientNames = new ArrayList<>();
-        List<Ingredient> ingredients = database.ingredientDao().getAll();
+        List<Ingredient> ingredients = AppDatabase.getInstance().ingredientDao().getAll();
         for (Ingredient ingredient: ingredients){
             ViewHolder.ingredientNames.add(ingredient.name);
         }

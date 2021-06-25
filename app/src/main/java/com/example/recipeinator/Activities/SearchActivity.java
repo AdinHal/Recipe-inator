@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.recipeinator.Adapters.RecipeAdapter;
+import com.example.recipeinator.Adapters.SearchRecipeAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
@@ -21,18 +22,14 @@ import com.google.android.material.snackbar.Snackbar;
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView searchResults;
-    private RecipeAdapter adapter;
+    private SearchRecipeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        AppDatabase database = Room.databaseBuilder(
-                this,
-                AppDatabase.class,
-                "database"
-        ).allowMainThreadQueries().build();
+        AppDatabase database = AppDatabase.getInstance();
 
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_search);
@@ -42,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
         searchResults.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(searchResults.getContext(), DividerItemDecoration.VERTICAL);
         searchResults.addItemDecoration(dividerItemDecoration);
-        adapter = new RecipeAdapter(database.recipeDao().getAll(), i -> {
+        adapter = new SearchRecipeAdapter(database.recipeDao().getAll(), i -> {
             Intent intent = new Intent(this, RecipeDetailActivity.class);
             intent.putExtra("RECIPE_ID", i);
             startActivity(intent);

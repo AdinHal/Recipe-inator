@@ -14,32 +14,15 @@ import com.example.recipeinator.R;
 import com.example.recipeinator.models.Recipe;
 import com.example.recipeinator.util.OnItemClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private final List<Recipe> recipes;
-    private final List<Recipe> filteredRecipes = new ArrayList<>();
     private final OnItemClickListener itemClickListener;
 
     public RecipeAdapter(List<Recipe> recipes, OnItemClickListener itemClickListener) {
         this.recipes = recipes;
         this.itemClickListener = itemClickListener;
-        filteredRecipes.addAll(recipes);
-    }
-
-    public void filter(String query) {
-        filteredRecipes.clear();
-        for (Recipe recipe : recipes) {
-            if (matches(recipe, query)) {
-                filteredRecipes.add(recipe);
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    private boolean matches(Recipe recipe, String query) {
-        return recipe.name.toLowerCase().contains(query.toLowerCase());
     }
 
     @NonNull
@@ -49,9 +32,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
+    public Recipe getRecipeAtPosition(int position) {
+        return recipes.get(position);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder holder, int position) {
-        Recipe recipe = filteredRecipes.get(position);
+        Recipe recipe = getRecipeAtPosition(position);
         ((TextView) holder.itemView.findViewById(R.id.recipe_list_name)).setText(recipe.name);
         ((TextView) holder.itemView.findViewById(R.id.recipe_list_description)).setText(recipe.description);
         ((ImageView) holder.itemView.findViewById(R.id.recipe_list_picture)).setImageURI(Uri.parse(recipe.pictureUri));
@@ -60,7 +47,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return filteredRecipes.size();
+        return recipes.size();
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

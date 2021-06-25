@@ -12,22 +12,25 @@ import androidx.room.Room;
 
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
+import com.example.recipeinator.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
-    private AppDatabase database;
+    private static User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        database = Room.databaseBuilder(
+        AppDatabase database = Room.databaseBuilder(
                 getApplicationContext(),
                 AppDatabase.class,
                 "database"
         ).allowMainThreadQueries().build();
+
+        AppDatabase.setInstance(database);
 
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
@@ -45,9 +48,10 @@ public class LoginActivity extends AppCompatActivity {
     }
     
     private void loginUser(String email, String password){
-        boolean isValid = database.userDao().getUserByEmailAndPassword(email,password);
+        User user = AppDatabase.getInstance().userDao().getUserByEmailAndPassword(email,password);
 
-        if (isValid) {
+        if (user != null) {
+            loggedInUser = user;
             Intent intent = new Intent(this, HomeActivity.class);
             // LoginActivity returns a result that indicates if the login was successful or not and calls finish()
             // Login Activity is no longer the task.
@@ -63,5 +67,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void createAccount(View view){
         startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+    public static User getLoggedInUser(){
+        return loggedInUser;
     }
 }

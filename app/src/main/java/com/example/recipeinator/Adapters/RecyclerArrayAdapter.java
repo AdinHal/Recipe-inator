@@ -9,6 +9,8 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recipeinator.R;
+
 import java.util.List;
 
 public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<RecyclerArrayAdapter.ViewHolder> {
@@ -29,7 +31,7 @@ public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<RecyclerArrayA
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerArrayAdapter.ViewHolder holder, int position) {
-        TextView textView = holder.itemView.findViewById(android.R.id.text1);
+        TextView textView = holder.itemView.findViewById(R.id.list_entry);
         textView.setText(list.get(position).toString());
     }
 
@@ -38,7 +40,7 @@ public class RecyclerArrayAdapter<T> extends RecyclerView.Adapter<RecyclerArrayA
         return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    protected static class ViewHolder extends RecyclerView.ViewHolder{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }

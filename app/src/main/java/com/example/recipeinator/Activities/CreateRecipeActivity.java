@@ -54,11 +54,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
 
-        database = Room.databaseBuilder(
-                this,
-                AppDatabase.class,
-                "database"
-        ).allowMainThreadQueries().build();
+        database = AppDatabase.getInstance();
 
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_recipes);
@@ -74,7 +70,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 return false;
             }
         });
-        adapter = new RecipeIngredientsAdapter(database, this);
+        adapter = new RecipeIngredientsAdapter(this);
         recyclerView.setAdapter(adapter);
         ImageView addIngredient = findViewById(R.id.add_ingredient);
         addIngredient.setOnClickListener(v -> adapter.addItem());
