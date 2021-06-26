@@ -65,11 +65,17 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
     public void createAccount(View view){
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
     public static User getLoggedInUser(){
         return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User user) {
+        loggedInUser = user;
     }
 }

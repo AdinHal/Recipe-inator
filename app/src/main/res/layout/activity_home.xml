@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -8,30 +8,32 @@
 
     <LinearLayout
         android:id="@+id/headerlayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="357dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="94dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Welcome back,"
+                android:text="@string/welcome_back"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/home_usernameTxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.038"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.16" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/main_topprofile"
@@ -50,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Masterchef"
+                tools:text="Masterchef"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -58,15 +60,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.04"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.709" />
+                app:layout_constraintTop_toBottomOf="@id/textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <HorizontalScrollView
             android:id="@+id/horisontalscrolltop"
             android:layout_width="fill_parent"
-            android:layout_marginBottom="50dp"
             android:layout_height="140dp"
             android:fillViewport="true"
             android:measureAllChildren="false"
@@ -74,13 +74,13 @@
             <LinearLayout
                 android:id="@+id/innerTop"
                 android:layout_width="489px"
-                android:layout_height="750px"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <LinearLayout
                 android:id="@+id/firstHorizontalRectangle"
                 android:layout_width="535px"
-                android:layout_height="905px"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
                 <RelativeLayout
@@ -88,6 +88,7 @@
                     android:layout_height="match_parent">
                     <ImageView
                         android:id="@+id/horizontalRectangle1"
+                        android:layout_marginStart="10dp"
                         android:layout_width="905px"
                         android:layout_height="489px"
                         android:layout_marginRight="5dp"
@@ -98,7 +99,7 @@
                 <LinearLayout
                     android:id="@+id/secondHorizontalRectangle"
                     android:layout_width="535px"
-                    android:layout_height="905px"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <RelativeLayout
@@ -116,7 +117,7 @@
                 <LinearLayout
                     android:id="@+id/thirdHorizontalRectangle"
                     android:layout_width="535px"
-                    android:layout_height="905px"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <RelativeLayout
@@ -133,7 +134,7 @@
                 <LinearLayout
                     android:id="@+id/fourthHorizontalRectangle"
                     android:layout_width="535px"
-                    android:layout_height="905px"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <RelativeLayout
@@ -150,7 +151,7 @@
                 <LinearLayout
                     android:id="@+id/fifthHorizontalRectangle"
                     android:layout_width="535px"
-                    android:layout_height="905px"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <RelativeLayout
@@ -168,554 +169,19 @@
         </HorizontalScrollView>
     </LinearLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/hsv"
-        android:layout_width="fill_parent"
-        android:layout_height="905px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recipe_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerlayout"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navbar"
+        android:layout_alignBottom="@id/bottom_navbar"
         android:fillViewport="true"
         android:measureAllChildren="false"
-        android:scrollbars="none">
-
-
-        <LinearLayout
-            android:id="@+id/innerLay"
-            android:layout_width="489px"
-            android:layout_height="905px"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/firstrectangle"
-                android:layout_width="535px"
-                android:layout_height="905px"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/mainscreen_rectangle1"
-                        android:layout_width="489px"
-                        android:layout_height="905px"
-                        android:src="@drawable/rectanglemain1" />
-
-                    <ImageView
-                        android:id="@+id/mealsize1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/tomato" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="38dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="1 serving"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <ImageView
-                        android:id="@+id/timetoprepare1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/clock" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="104dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="4 min"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <TextView
-                        android:id="@+id/grilledcheese"
-                        android:layout_width="147dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="190dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Classic Grilled Cheese-Ham Toast"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/secondrectangle"
-                android:layout_width="535px"
-                android:layout_height="905px"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="489px"
-                        android:layout_height="905px"
-                        android:src="@drawable/rectangle2" />
-
-                    <ImageView
-                        android:id="@+id/mealsize2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/tomato" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="38dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="2 servings"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <ImageView
-                        android:id="@+id/timetoprepare2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/clock" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="104dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="12 min"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <TextView
-                        android:id="@+id/chickenfriedrice"
-                        android:layout_width="147dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="190dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Chicken Fried Rice"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/thirdrectangle"
-                android:layout_width="535px"
-                android:layout_height="905px"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="489px"
-                        android:layout_height="905px"
-                        android:src="@drawable/rectangle3" />
-
-                    <TextView
-                        android:id="@+id/veggieburger"
-                        android:layout_width="147dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="190dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Veggie Burger a la Italiana"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/mealsize3"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/tomato" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="95dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="38dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="1 serving"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <ImageView
-                        android:id="@+id/timetoprepare3"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/clock" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="104dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="8 min"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/fourthrectangle"
-                android:layout_width="535px"
-                android:layout_height="905px"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="489px"
-                        android:layout_height="905px"
-                        android:src="@drawable/rectangle4" />
-
-                    <ImageView
-                        android:id="@+id/beeftaco"
-                        android:layout_width="179dp"
-                        android:layout_height="197dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="-55dp"
-                        android:src="@drawable/beeftaco" />
-
-                    <ImageView
-                        android:id="@+id/mealsize4"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/tomato" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="95dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="38dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="2 servings"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <ImageView
-                        android:id="@+id/timetoprepare4"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/clock" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="104dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="20 min"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <TextView
-                        android:id="@+id/beeftacos"
-                        android:layout_width="147dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="187dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Beef Tacos"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/fifthrectangle"
-                android:layout_width="535px"
-                android:layout_height="905px"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="489px"
-                        android:layout_height="905px"
-                        android:src="@drawable/rectangle5" />
-
-                    <ImageView
-                        android:id="@+id/avocadoeggtoast"
-                        android:layout_width="190dp"
-                        android:layout_height="197dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="-67dp"
-                        android:src="@drawable/avocadoeggtoast" />
-
-                    <ImageView
-                        android:id="@+id/mealsize5"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/tomato" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginBottom="75dp"
-                        android:src="@drawable/star" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="38dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="1 serving"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <ImageView
-                        android:id="@+id/timetoprepare5"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginBottom="35dp"
-                        android:src="@drawable/clock" />
-
-                    <TextView
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="104dp"
-                        android:layout_marginBottom="39dp"
-                        android:text="7 min"
-                        android:textColor="#FFFFFF"
-                        android:textSize="8sp" />
-
-                    <TextView
-                        android:id="@+id/eggavocadotoast"
-                        android:layout_width="147dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="190dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Grilled Egg Avocado Toast"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:scrollbars="none" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navbar"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="labeled"
@@ -725,8 +191,10 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <WebView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navbar"
         android:id="@+id/webview"
         android:visibility="invisible"/>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

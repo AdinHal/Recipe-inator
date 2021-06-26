@@ -3,6 +3,7 @@ package com.example.recipeinator.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -22,6 +23,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        TextView username = findViewById(R.id.profileview_text);
+        username.setText(LoginActivity.getLoggedInUser().nickname);
 
         AppDatabase database = AppDatabase.getInstance();
         User user = LoginActivity.getLoggedInUser();

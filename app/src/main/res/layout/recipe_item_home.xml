@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="180dp"
+    android:layout_height="match_parent"
+    tools:layout_height="400dp"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/home_recipe_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@drawable/negative_border_box"/>
+
+    <ImageView
+        android:id="@+id/home_recipe_picture"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        tools:src="@drawable/rectanglemain1" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/tomato" />
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="75dp"
+        android:src="@drawable/star" />
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="75dp"
+        android:src="@drawable/star" />
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="75dp"
+        android:src="@drawable/star" />
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="75dp"
+        android:layout_marginBottom="75dp"
+        android:src="@drawable/star" />
+
+    <TextView
+        android:id="@+id/home_recipe_servings"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="39dp"
+        tools:text="1 serving"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/clock" />
+
+    <TextView
+        android:id="@+id/home_recipe_time"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/home_recipe_background"
+        android:layout_marginStart="124dp"
+        android:layout_marginBottom="39dp"
+        tools:text="4 min"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/home_recipe_name"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="170dp"
+        android:fontFamily="@font/montserrat_bold"
+        tools:text="Classic Grilled Cheese-Ham Toast"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/home_recipe_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_recipe_name"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#FFFFFF"
+        tools:text="This is an example description that you might find under a recipe" />
+</RelativeLayout>

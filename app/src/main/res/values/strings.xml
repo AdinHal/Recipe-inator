@@ -51,5 +51,8 @@
     <string name="time_empty">Time can\'t be empty</string>
     <string name="enter_positive">Enter a positive number</string>
     <string name="favorite_recipes">Favorite Recipes</string>
+    <string name="welcome_back">Welcome back,</string>
+    <string name="time_parametrized">%1$d min</string>
+    <string name="serving_parametrized">%1$d serving</string>
     <string name="hungry">Hungry?</string>
 </resources>
