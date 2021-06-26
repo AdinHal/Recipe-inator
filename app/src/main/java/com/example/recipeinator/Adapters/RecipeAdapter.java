@@ -54,6 +54,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return recipes;
     }
 
+    public OnItemClickListener getItemClickListener() {
+        return itemClickListener;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

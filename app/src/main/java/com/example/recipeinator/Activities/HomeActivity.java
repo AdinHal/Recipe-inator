@@ -1,20 +1,20 @@
 package com.example.recipeinator.Activities;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.recipeinator.Adapters.HomeRecipeAdapter;
+import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,8 +35,6 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_home);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
-
-        Toast.makeText(this,"Swipe left, top and bottom news",Toast.LENGTH_LONG).show();
 
         webView = findViewById(R.id.webview);
         WebSettings webSettings = webView.getSettings();
@@ -73,8 +71,17 @@ public class HomeActivity extends AppCompatActivity {
             webView.loadUrl("https://www.kitchenstories.com/en/stories/our-15-essential-spices-and-how-to-store-them");
         });
 
+        RecyclerView recyclerView = findViewById(R.id.main_recipe_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
+        HomeRecipeAdapter adapter = new HomeRecipeAdapter(AppDatabase.getInstance().recipeDao().getAll(), i -> {
+            Intent intent = new Intent(this, RecipeDetailActivity.class);
+            intent.putExtra("RECIPE_ID", i);
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(adapter);
     }
+
     @Override
     public boolean onKeyDown(int keyCode,KeyEvent event){
         if((keyCode == KeyEvent.KEYCODE_BACK)){
