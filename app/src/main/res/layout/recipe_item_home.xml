@@ -16,6 +16,7 @@
         android:id="@+id/home_recipe_picture"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_margin="10dp"
         tools:src="@drawable/rectanglemain1" />
 
     <ImageView
