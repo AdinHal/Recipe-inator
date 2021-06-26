@@ -11,6 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,10 +26,11 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        TextView username = findViewById(R.id.home_usernameTxt);
+        username.setText(LoginActivity.getLoggedInUser().nickname);
 
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_home);
@@ -36,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Toast.makeText(this,"Swipe left, top and bottom news",Toast.LENGTH_LONG).show();
 
-        webView = (WebView)findViewById(R.id.webview);
+        webView = findViewById(R.id.webview);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
@@ -46,44 +48,29 @@ public class HomeActivity extends AppCompatActivity {
         article4 = findViewById(R.id.horizontalRectangle4);
         article5 = findViewById(R.id.horizontalRectangle5);
 
-        article1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("https://www.kitchenstories.com/en/stories/more-mayo-more-flavor-6-yum-mayo-upgrades");
-            }
+        article1.setOnClickListener(v -> {
+            webView.setVisibility(View.VISIBLE);
+            webView.loadUrl("https://www.kitchenstories.com/en/stories/more-mayo-more-flavor-6-yum-mayo-upgrades");
         });
 
-        article2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("https://www.kitchenstories.com/en/stories/11-hot-sauces-that-are-on-fire-with-flavor");
-            }
+        article2.setOnClickListener(v -> {
+            webView.setVisibility(View.VISIBLE);
+            webView.loadUrl("https://www.kitchenstories.com/en/stories/11-hot-sauces-that-are-on-fire-with-flavor");
         });
 
-        article3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("https://www.kitchenstories.com/en/stories/need-more-everyday-cooking-tips-here-are-23-of-our-favorites");
-            }
+        article3.setOnClickListener(v -> {
+            webView.setVisibility(View.VISIBLE);
+            webView.loadUrl("https://www.kitchenstories.com/en/stories/need-more-everyday-cooking-tips-here-are-23-of-our-favorites");
         });
 
-        article4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("https://www.kitchenstories.com/en/stories/how-to-make-a-really-good-cup-of-coffee-at-home");
-            }
+        article4.setOnClickListener(v -> {
+            webView.setVisibility(View.VISIBLE);
+            webView.loadUrl("https://www.kitchenstories.com/en/stories/how-to-make-a-really-good-cup-of-coffee-at-home");
         });
 
-        article5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("https://www.kitchenstories.com/en/stories/our-15-essential-spices-and-how-to-store-them");
-            }
+        article5.setOnClickListener(v -> {
+            webView.setVisibility(View.VISIBLE);
+            webView.loadUrl("https://www.kitchenstories.com/en/stories/our-15-essential-spices-and-how-to-store-them");
         });
 
 
