@@ -48,7 +48,7 @@ public class HomeRecipeAdapter extends RecipeAdapter {
         ImageView picture = holder.itemView.findViewById(R.id.home_recipe_picture);
         picture.setImageURI(Uri.parse(recipe.pictureUri));
         TextView servings = holder.itemView.findViewById(R.id.home_recipe_servings);
-        servings.setText("1 serving");
+        servings.setText(recipe.servings + "serving(s)");
         TextView time = holder.itemView.findViewById(R.id.home_recipe_time);
         time.setText(recipe.preparationTime + " min");
         holder.itemView.setOnClickListener(v -> getItemClickListener().onItemClicked(recipe.id));

@@ -54,4 +54,6 @@
     <string name="welcome_back">Welcome back,</string>
     <string name="time_parametrized">%1$d min</string>
     <string name="serving_parametrized">%1$d serving</string>
+    <string name="serving_parametrized2">Servings: %1$d</string>
+    <string name="servings">Servings</string>
 </resources>
