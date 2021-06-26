@@ -63,6 +63,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         TextView time = findViewById(R.id.recipe_detail_preparation_time);
         time.setText(getString(R.string.preparation_time_parametrized, recipe.preparationTime));
 
+        TextView servings = findViewById(R.id.recipe_detail_servings);
+        servings.setText(getString(R.string.serving_parametrized2, recipe.servings));
+
         RecyclerArrayAdapter<MeasuredIngredient> adapter = new RecyclerArrayAdapter<>(R.layout.generic_list_item_small, recipe.getIngredients());
         RecyclerView recyclerView = findViewById(R.id.recipe_detail_ingredients);
         recyclerView.setAdapter(adapter);

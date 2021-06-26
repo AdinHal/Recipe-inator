@@ -101,6 +101,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
     private void saveRecipe(){
         Recipe recipe = new Recipe(((EditText)findViewById(R.id.recipe_name)).getText().toString());
         recipe.preparationTime = Integer.parseInt(((EditText) findViewById(R.id.preparation_time)).getText().toString());
+        recipe.servings = Integer.parseInt(((EditText) findViewById(R.id.recipe_servings)).getText().toString());
         recipe.instructions = ((EditText) findViewById(R.id.recipe_instructions)).getText().toString();
         recipe.description = ((EditText) findViewById(R.id.recipe_description)).getText().toString();
         recipe.categoryId = ((Category)((Spinner) findViewById(R.id.recipe_category)).getSelectedItem()).id;

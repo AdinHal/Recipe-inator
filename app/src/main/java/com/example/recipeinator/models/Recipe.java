@@ -3,7 +3,6 @@ package com.example.recipeinator.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ public class Recipe {
     @ColumnInfo(name = "picture_uri") public String pictureUri;
     @ColumnInfo(name = "instructions") public String instructions;
     @ColumnInfo(name = "category_id") public int categoryId;
+    @ColumnInfo(name = "servings", defaultValue = "1") public int servings;
 
     @Ignore private List<MeasuredIngredient> ingredients = new ArrayList<>();
     @Ignore private Category category;

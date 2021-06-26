@@ -16,13 +16,12 @@ import com.example.recipeinator.util.OnItemClickListener;
 import java.util.List;
 
 public class HomeRecipeAdapter extends RecipeAdapter {
-    // TODO: change this
     private final int[] backgroundResources = new int[]{
-            R.drawable.negative_border_box,
-            R.drawable.negative_border_box,
-            R.drawable.negative_border_box,
-            R.drawable.negative_border_box,
-            R.drawable.negative_border_box
+            R.drawable.background1,
+            R.drawable.background2,
+            R.drawable.background3,
+            R.drawable.background4,
+            R.drawable.background5
     };
 
     public HomeRecipeAdapter(List<Recipe> recipes, OnItemClickListener itemClickListener) {
@@ -48,7 +47,7 @@ public class HomeRecipeAdapter extends RecipeAdapter {
         ImageView picture = holder.itemView.findViewById(R.id.home_recipe_picture);
         picture.setImageURI(Uri.parse(recipe.pictureUri));
         TextView servings = holder.itemView.findViewById(R.id.home_recipe_servings);
-        servings.setText("1 serving");
+        servings.setText(recipe.servings + "serving");
         TextView time = holder.itemView.findViewById(R.id.home_recipe_time);
         time.setText(recipe.preparationTime + " min");
         holder.itemView.setOnClickListener(v -> getItemClickListener().onItemClicked(recipe.id));

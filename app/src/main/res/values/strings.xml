@@ -55,4 +55,6 @@
     <string name="time_parametrized">%1$d min</string>
     <string name="serving_parametrized">%1$d serving</string>
     <string name="hungry">Hungry?</string>
+    <string name="serving_parametrized2">Servings: %1$d</string>
+    <string name="servings">Servings</string>
 </resources>
