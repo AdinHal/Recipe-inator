@@ -9,8 +9,10 @@
         android:id="@+id/main_searchbar"
         android:layout_width="354dp"
         android:layout_height="51dp"
+        android:queryHint="@string/hungry"
         android:background="@drawable/bg_gray_rounded"
         android:submitBackground="@drawable/bg_gray_rounded"
+        android:iconifiedByDefault="false"
         app:layout_constraintStart_toStartOf="@+id/search_title"
         app:layout_constraintTop_toBottomOf="@+id/search_title" />
 

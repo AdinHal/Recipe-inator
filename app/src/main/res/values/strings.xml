@@ -51,4 +51,5 @@
     <string name="time_empty">Time can\'t be empty</string>
     <string name="enter_positive">Enter a positive number</string>
     <string name="favorite_recipes">Favorite Recipes</string>
+    <string name="hungry">Hungry?</string>
 </resources>
