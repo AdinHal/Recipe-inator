@@ -117,17 +117,6 @@
         app:layout_constraintVertical_bias="0.537"
         app:srcCompat="@drawable/vegetariansearch" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_results"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_searchbar" />
-
     <TextView
         android:id="@+id/showallrecipes_search"
         android:layout_width="337dp"
@@ -153,5 +142,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.681"
         app:srcCompat="@drawable/next" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_results"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_searchbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
