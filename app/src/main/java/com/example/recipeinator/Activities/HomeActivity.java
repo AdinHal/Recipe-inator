@@ -86,12 +86,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode,KeyEvent event){
-        if((keyCode == KeyEvent.KEYCODE_BACK)){
-            Intent intent = new Intent(this,HomeActivity.class);
-            startActivity(intent);
-            return true;
+    public void onBackPressed(){
+        if(webView.canGoBack()){
+            webView.goBack();
+        }else{
+            super.onBackPressed();
         }
-        return super.onKeyDown(keyCode,event);
     }
+
 }
