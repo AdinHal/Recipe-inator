@@ -7,33 +7,62 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.R;
+import com.example.recipeinator.models.Category;
 import com.example.recipeinator.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
     private static User loggedInUser;
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        AppDatabase database = Room.databaseBuilder(
-                getApplicationContext(),
-                AppDatabase.class,
-                "database"
-        ).allowMainThreadQueries().build();
-
-        AppDatabase.setInstance(database);
+        createDatabase();
 
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
+    }
+
+    public void createDatabase() {
+        boolean[] isNew = new boolean[]{false};
+
+        database = Room.databaseBuilder(
+                getApplicationContext(),
+                AppDatabase.class,
+                "database"
+        ).addMigrations(AppDatabase.MIGRATION_1_2
+        ).addCallback(new RoomDatabase.Callback() {
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+                // hacky solution to insert data when the db is created
+                isNew[0] = true;
+            }
+        }).allowMainThreadQueries().build();
+
+        database.categoryDao().getAll();
+
+        if (isNew[0]){
+            importDefaultData();
+        }
+
+        AppDatabase.setInstance(database);
+    }
+
+    public void importDefaultData(){
+        database.categoryDao().insertAll(new Category("Main Course"), new Category("Starter"), new Category("Dessert"));
     }
 
     public void logIn(View view){
