@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void registerUser(User user){
         // Adding the new user to the database
         database.userDao().insertAll(user);
+        LoginActivity.setLoggedInUser(user);
         startActivity(new Intent(this, HomeActivity.class));
     }
 
