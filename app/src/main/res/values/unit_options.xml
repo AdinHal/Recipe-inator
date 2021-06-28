@@ -2,6 +2,7 @@
 <resources>
     <string-array name="unit_array">
         <item>g</item>
+        <item>ml</item>
         <item>pcs</item>
         <item>tsp</item>
         <item>tbsp</item>
