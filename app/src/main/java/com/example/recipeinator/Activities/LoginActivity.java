@@ -1,9 +1,11 @@
 package com.example.recipeinator.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -61,11 +63,20 @@ public class LoginActivity extends AppCompatActivity {
         AppDatabase.setInstance(database);
     }
 
+    private void closeKeyboard(){
+        View view = getCurrentFocus();
+        if(view != null){
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
     public void importDefaultData(){
         database.categoryDao().insertAll(new Category("Main Course"), new Category("Starter"), new Category("Dessert"));
     }
 
     public void logIn(View view){
+        closeKeyboard();
         // Created separate variables in order for code to look cleaner
         String mail = email.getText().toString();
         String pw = password.getText().toString();
