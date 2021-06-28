@@ -72,7 +72,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void importDefaultData(){
-        database.categoryDao().insertAll(new Category("Main Course"), new Category("Starter"), new Category("Dessert"));
+        database.categoryDao().insertAll(
+                new Category("Main Course"), new Category("Asian"), new Category("Dessert"),
+                new Category("Fast"), new Category("Pasta"), new Category("Vegetarian")
+        );
     }
 
     public void logIn(View view){

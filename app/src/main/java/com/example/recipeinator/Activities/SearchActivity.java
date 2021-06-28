@@ -2,7 +2,9 @@ package com.example.recipeinator.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.example.recipeinator.Adapters.SearchRecipeAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
+import com.example.recipeinator.models.Category;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -46,6 +49,15 @@ public class SearchActivity extends AppCompatActivity {
         });
         searchResults.setAdapter(adapter);
 
+        findViewById(R.id.show_all_recipes_search).setOnClickListener(v -> showAllRecipes());
+
+        findViewById(R.id.asian_search_option).setOnClickListener(v -> filterByCategory(new Category("Asian")));
+        findViewById(R.id.dessert_search_option).setOnClickListener(v -> filterByCategory(new Category("Dessert")));
+        findViewById(R.id.fast_search_option).setOnClickListener(v -> filterByCategory(new Category("Fast")));
+        findViewById(R.id.main_course_search_option).setOnClickListener(v -> filterByCategory(new Category("Main Course")));
+        findViewById(R.id.pasta_search_option).setOnClickListener(v -> filterByCategory(new Category("Pasta")));
+        findViewById(R.id.vegetarian_search_option).setOnClickListener(v -> filterByCategory(new Category("Vegetarian")));
+
         SearchView searchView = findViewById(R.id.main_searchbar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -63,9 +75,27 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void handleSearch(String query) {
-        searchResults.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE);
-        adapter.filter(query);
-        if (adapter.getItemCount() == 0 && !query.isEmpty()) {
+        if (query.isEmpty()) {
+            searchResults.setVisibility(View.GONE);
+            adapter.clearFilter();
+            return;
+        }
+        searchResults.setVisibility(View.VISIBLE);
+        adapter.filterName(query);
+        if (adapter.getItemCount() == 0) {
+            Snackbar.make(findViewById(android.R.id.content), R.string.no_results, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    private void showAllRecipes() {
+        searchResults.setVisibility(View.VISIBLE);
+        adapter.filterName("");
+    }
+
+    private void filterByCategory(Category category) {
+        searchResults.setVisibility(View.VISIBLE);
+        adapter.filterCategory(category);
+        if (adapter.getItemCount() == 0 && category != null) {
             Snackbar.make(findViewById(android.R.id.content), R.string.no_results, Snackbar.LENGTH_LONG).show();
         }
     }
