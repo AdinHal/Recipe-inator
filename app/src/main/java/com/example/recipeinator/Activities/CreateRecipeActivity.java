@@ -1,12 +1,14 @@
 package com.example.recipeinator.Activities;
 
 import android.content.Intent;
+import android.media.Rating;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -105,6 +107,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         recipe.instructions = ((EditText) findViewById(R.id.recipe_instructions)).getText().toString();
         recipe.description = ((EditText) findViewById(R.id.recipe_description)).getText().toString();
         recipe.categoryId = ((Category)((Spinner) findViewById(R.id.recipe_category)).getSelectedItem()).id;
+        recipe.difficulty = (int) ((RatingBar) findViewById(R.id.recipe_rating)).getRating();
         recipe.pictureUri = pictureUri.toString();
         for (int i = 0; i < adapter.getItemCount(); i++) {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);

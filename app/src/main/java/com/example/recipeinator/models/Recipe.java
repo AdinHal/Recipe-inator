@@ -19,6 +19,7 @@ public class Recipe {
     @ColumnInfo(name = "instructions") public String instructions;
     @ColumnInfo(name = "category_id") public int categoryId;
     @ColumnInfo(name = "servings", defaultValue = "1") public int servings;
+    @ColumnInfo(name = "difficulty", defaultValue = "1") public int difficulty;
 
     @Ignore private List<MeasuredIngredient> ingredients = new ArrayList<>();
     @Ignore private Category category;

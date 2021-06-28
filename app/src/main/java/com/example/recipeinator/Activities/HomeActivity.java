@@ -18,6 +18,7 @@ import com.example.recipeinator.Adapters.HomeRecipeAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
+import com.example.recipeinator.views.RatingView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -27,8 +28,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -38,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_home);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
-        Toast.makeText(this,"Swipe left, top and bottom news",Toast.LENGTH_LONG).show();
+
         webView = findViewById(R.id.webview);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);

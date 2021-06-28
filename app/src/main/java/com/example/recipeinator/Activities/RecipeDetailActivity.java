@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +66,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         TextView servings = findViewById(R.id.recipe_detail_servings);
         servings.setText(getString(R.string.serving_parametrized2, recipe.servings));
+
+        RatingBar difficulty = findViewById(R.id.recipe_detail_difficulty);
+        difficulty.setRating(recipe.difficulty);
 
         RecyclerArrayAdapter<MeasuredIngredient> adapter = new RecyclerArrayAdapter<>(R.layout.generic_list_item_small, recipe.getIngredients());
         RecyclerView recyclerView = findViewById(R.id.recipe_detail_ingredients);

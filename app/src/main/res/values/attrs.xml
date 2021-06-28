@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DifficultyRating">
+        <attr name="maxItemCount" format="integer" />
+        <attr name="itemCount" format="integer" />
+        <attr name="itemDrawable" format="reference" />
+    </declare-styleable>
+</resources>

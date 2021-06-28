@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.recipeinator.Activities.LoginActivity;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.Recipe;
 import com.example.recipeinator.util.OnItemClickListener;
+import com.example.recipeinator.views.RatingView;
 
 import java.util.List;
 
@@ -38,18 +40,27 @@ public class HomeRecipeAdapter extends RecipeAdapter {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Recipe recipe = getRecipes().get(position);
+
         ImageView background = holder.itemView.findViewById(R.id.home_recipe_background);
         background.setBackgroundResource(backgroundResources[position % 5]);
+
         TextView name = holder.itemView.findViewById(R.id.home_recipe_name);
         name.setText(recipe.name);
+
         TextView description = holder.itemView.findViewById(R.id.home_recipe_description);
         description.setText(recipe.description);
+
         ImageView picture = holder.itemView.findViewById(R.id.home_recipe_picture);
         picture.setImageURI(Uri.parse(recipe.pictureUri));
+
         TextView servings = holder.itemView.findViewById(R.id.home_recipe_servings);
         servings.setText(recipe.servings + "serving");
+
         TextView time = holder.itemView.findViewById(R.id.home_recipe_time);
         time.setText(recipe.preparationTime + " min");
+
+        RatingView ratingView = holder.itemView.findViewById(R.id.recipe_difficulty_home);
+        ratingView.setItemCount(recipe.difficulty);
         holder.itemView.setOnClickListener(v -> getItemClickListener().onItemClicked(recipe.id));
     }
 

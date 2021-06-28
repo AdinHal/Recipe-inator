@@ -67,6 +67,28 @@
                 app:layout_constraintTop_toBottomOf="@+id/recipe_detail_category" />
 
             <TextView
+                android:id="@+id/recipe_detail_difficulty_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/difficulty"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_preparation_time" />
+
+            <RatingBar
+                android:id="@+id/recipe_detail_difficulty"
+                android:isIndicator="true"
+                android:progressDrawable="@drawable/custom_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toTopOf="@id/recipe_detail_difficulty_label"
+                app:layout_constraintBottom_toBottomOf="@id/recipe_detail_difficulty_label"
+                app:layout_constraintStart_toEndOf="@id/recipe_detail_difficulty_label" />
+
+            <TextView
                 android:id="@+id/recipe_detail_servings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +96,7 @@
                 android:layout_marginTop="16dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_preparation_time"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_difficulty_label"
                 tools:text="Servings: 1" />
 
             <androidx.recyclerview.widget.RecyclerView

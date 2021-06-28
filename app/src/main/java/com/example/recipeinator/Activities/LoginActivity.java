@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                 getApplicationContext(),
                 AppDatabase.class,
                 "database"
-        ).addMigrations(AppDatabase.MIGRATION_1_2
+        ).addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3
         ).addCallback(new RoomDatabase.Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {

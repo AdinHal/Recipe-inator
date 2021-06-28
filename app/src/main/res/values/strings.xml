@@ -57,4 +57,5 @@
     <string name="hungry">Hungry?</string>
     <string name="serving_parametrized2">Servings: %1$d</string>
     <string name="servings">Servings</string>
+    <string name="difficulty">Difficulty</string>
 </resources>

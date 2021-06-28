@@ -19,7 +19,7 @@ import com.example.recipeinator.models.User;
 import com.example.recipeinator.models.UserRecipeCrossRef;
 
 @Database(
-        version= 2,
+        version= 3,
         entities = {Recipe.class, Ingredient.class, RecipeIngredientCrossRef.class, Groceries.class, User.class, Category.class, UserRecipeCrossRef.class},
         exportSchema = false
 )
@@ -47,4 +47,10 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE Recipe ADD COLUMN difficulty INTEGER NOT NULL DEFAULT 1;");
+        }
+    };
 }
