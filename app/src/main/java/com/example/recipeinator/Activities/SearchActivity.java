@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -26,6 +28,8 @@ public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView searchResults;
     private SearchRecipeAdapter adapter;
+    private TextView categoryText;
+    private ImageView clearCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +76,18 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        categoryText = findViewById(R.id.search_category);
+        clearCategory = findViewById(R.id.clear_category);
+        clearCategory.setOnClickListener(v -> filterByCategory(null));
     }
 
     private void handleSearch(String query) {
-        if (query.isEmpty()) {
-            searchResults.setVisibility(View.GONE);
-            adapter.clearFilter();
+        adapter.filterName(query);
+        if (resetSearchIfEmpty()) {
             return;
         }
         searchResults.setVisibility(View.VISIBLE);
-        adapter.filterName(query);
         if (adapter.getItemCount() == 0) {
             Snackbar.make(findViewById(android.R.id.content), R.string.no_results, Snackbar.LENGTH_LONG).show();
         }
@@ -89,14 +95,41 @@ public class SearchActivity extends AppCompatActivity {
 
     private void showAllRecipes() {
         searchResults.setVisibility(View.VISIBLE);
+        clearCategory.setVisibility(View.VISIBLE);
         adapter.filterName("");
+        categoryText.setText(getString(R.string.category_parametrized, "All"));
     }
 
     private void filterByCategory(Category category) {
-        searchResults.setVisibility(View.VISIBLE);
         adapter.filterCategory(category);
-        if (adapter.getItemCount() == 0 && category != null) {
+        if (resetSearchIfEmpty()) {
+            return;
+        }
+        if (category != null) {
+            clearCategory.setVisibility(View.VISIBLE);
+            searchResults.setVisibility(View.VISIBLE);
+            categoryText.setText(getString(R.string.category_parametrized, category.name));
+        } else {
+            clearCategory.setVisibility(View.GONE);
+            categoryText.setText("");
+        }
+        if (adapter.getItemCount() == 0) {
             Snackbar.make(findViewById(android.R.id.content), R.string.no_results, Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    private boolean resetSearchIfEmpty() {
+        if (adapter.filterIsEmpty()) {
+            resetSearch();
+            return true;
+        }
+        return false;
+    }
+
+    private void resetSearch() {
+        clearCategory.setVisibility(View.GONE);
+        searchResults.setVisibility(View.GONE);
+        adapter.clearFilter();
+        categoryText.setText("");
     }
 }

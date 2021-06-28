@@ -42,6 +42,10 @@ public class SearchRecipeAdapter extends RecipeAdapter {
         filteredCategory = null;
     }
 
+    public boolean filterIsEmpty() {
+        return (filteredName == null || filteredName.isEmpty()) && (filteredCategory == null);
+    }
+
     private boolean matchesCategory(Recipe recipe) {
         return filteredCategory == null || recipe.getCategory().name.equals(filteredCategory.name);
     }
