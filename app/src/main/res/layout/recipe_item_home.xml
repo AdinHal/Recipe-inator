@@ -46,9 +46,9 @@
         android:layout_alignBottom="@id/home_recipe_background"
         android:layout_marginStart="38dp"
         android:layout_marginBottom="39dp"
-        tools:text="1 serving"
         android:textColor="#FFFFFF"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        tools:text="1  serving" />
 
     <ImageView
         android:layout_width="20dp"

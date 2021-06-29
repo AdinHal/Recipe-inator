@@ -6,16 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/main_topprofile2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/profile_logout"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044"
-        app:srcCompat="@drawable/user" />
+        app:layout_constraintVertical_bias="0.057"
+        app:srcCompat="@drawable/logout" />
 
     <TextView
         android:id="@+id/profileview_text"
