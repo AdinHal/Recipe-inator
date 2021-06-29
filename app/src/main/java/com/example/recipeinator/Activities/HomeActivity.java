@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public ImageView article1, article2, article3, article4, article5;
     public WebView webView;
+    public ImageView profilepic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -47,6 +48,13 @@ public class HomeActivity extends AppCompatActivity {
         article3 = findViewById(R.id.horizontalRectangle3);
         article4 = findViewById(R.id.horizontalRectangle4);
         article5 = findViewById(R.id.horizontalRectangle5);
+
+        profilepic = findViewById(R.id.main_topprofile);
+
+        profilepic.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+            startActivity(intent);
+        });
 
         article1.setOnClickListener(v -> {
             webView.setVisibility(View.VISIBLE);
