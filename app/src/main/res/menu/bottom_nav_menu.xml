@@ -14,12 +14,12 @@
         android:id="@+id/page_recipes"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_receipt_long_24"
-        android:title="@string/recipes"/>
+        android:title="@string/new_recipes"/>
     <item
         android:id="@+id/page_list"
         android:enabled="true"
         android:icon="@drawable/list"
-        android:title="@string/groceries"/>
+        android:title="@string/grocery_list"/>
     <item
         android:id="@+id/page_profile"
         android:enabled="true"

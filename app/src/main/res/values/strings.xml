@@ -4,6 +4,7 @@
     <string name="search">Search</string>
     <string name="random">Random</string>
     <string name="groceries">Groceries</string>
+    <string name="grocery_list">Grocery List</string>
     <string name="profile">Profile</string>
     <string name="unit">Unit</string>
     <string name="amount">Amount</string>
@@ -12,6 +13,7 @@
     <string name="preparation_time">Preparation Time</string>
     <string name="save_recipe">Save Recipe</string>
     <string name="recipes">Recipes</string>
+    <string name="new_recipes">New Recipe</string>
     <string name="recipe_picture">Recipe Picture</string>
     <string name="picture">Picture</string>
     <string name="select">Select</string>
