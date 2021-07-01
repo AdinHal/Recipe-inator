@@ -18,7 +18,8 @@
     <string name="picture">Picture</string>
     <string name="select">Select</string>
     <string name="min">min</string>
-    <string name="ingredients">Ingredients:</string>
+    <string name="ingredients_">Ingredients:</string>
+    <string name="ingredients">Ingredients</string>
     <string name="preparation_time_parametrized">Preparation Time: %1$d min</string>
     <string name="delete_item">Delete Item</string>
     <string name="delete_warning">Are you sure you want to delete this item?</string>
@@ -61,4 +62,6 @@
     <string name="servings">Servings</string>
     <string name="difficulty">Difficulty</string>
     <string name="all_recipes">All recipes</string>
+    <string name="hint">HINT: You can search for multiple ingredients by separating them with a comma. This will show recipes that contain ALL ingredients.</string>
+    <string name="ingredients_list">Ingredient1, Ingredient2, …</string>
 </resources>

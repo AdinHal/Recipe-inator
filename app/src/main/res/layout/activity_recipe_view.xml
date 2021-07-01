@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"
-                android:text="@string/ingredients"
+                android:text="@string/ingredients_"
                 app:layout_constraintStart_toStartOf="@+id/recipe_detail_preparation_time"
                 app:layout_constraintTop_toBottomOf="@+id/recipe_detail_servings" />
 
