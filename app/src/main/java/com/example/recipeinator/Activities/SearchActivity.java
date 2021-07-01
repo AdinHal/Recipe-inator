@@ -18,6 +18,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -107,10 +108,11 @@ public class SearchActivity extends AppCompatActivity {
         int black = getResources().getColor(R.color.black, null);
         TextView byIngredients = findViewById(R.id.by_ingredients);
         TextView hint = findViewById(R.id.search_hint);
+        CardView hintContainer = findViewById(R.id.search_hint_container);
         TextView byRecipe = findViewById(R.id.by_recipe);
         byIngredients.setTextColor(isIngredient ? black : gray);
         byRecipe.setTextColor(isIngredient ? gray : black);
-        hint.setVisibility(isIngredient ? View.VISIBLE : View.GONE);
+        hintContainer.setVisibility(isIngredient ? View.VISIBLE : View.GONE);
         searchView.setQueryHint(getString(isIngredient ? R.string.ingredients_list : R.string.recipe));
         searchView.setQuery(searchView.getQuery(), true);
         setHintText(hint);
