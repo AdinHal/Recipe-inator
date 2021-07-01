@@ -6,6 +6,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(indices={@Index(value="name", unique=true)})
 public class Ingredient {
     @PrimaryKey(autoGenerate = true)
@@ -24,6 +26,11 @@ public class Ingredient {
     public Ingredient(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     @Override

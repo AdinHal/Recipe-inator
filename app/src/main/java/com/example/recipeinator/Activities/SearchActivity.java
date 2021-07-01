@@ -1,28 +1,33 @@
 package com.example.recipeinator.Activities;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.BaseColumns;
 import android.view.View;
-import android.widget.GridLayout;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.example.recipeinator.Adapters.RecipeAdapter;
 import com.example.recipeinator.Adapters.SearchRecipeAdapter;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
 import com.example.recipeinator.models.Category;
+import com.example.recipeinator.models.Ingredient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -30,6 +35,8 @@ public class SearchActivity extends AppCompatActivity {
     private SearchRecipeAdapter adapter;
     private TextView categoryText;
     private ImageView clearCategory;
+    private SearchView searchView;
+    private CursorAdapter suggestionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RecipeDetailActivity.class);
             intent.putExtra("RECIPE_ID", i);
             startActivity(intent);
-        });
+        }, database.ingredientDao().getAllWithRecipes());
         searchResults.setAdapter(adapter);
 
         findViewById(R.id.show_all_recipes_search).setOnClickListener(v -> showAllRecipes());
@@ -62,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
         findViewById(R.id.pasta_search_option).setOnClickListener(v -> filterByCategory(new Category("Pasta")));
         findViewById(R.id.vegetarian_search_option).setOnClickListener(v -> filterByCategory(new Category("Vegetarian")));
 
-        SearchView searchView = findViewById(R.id.main_searchbar);
+        searchView = findViewById(R.id.main_searchbar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -72,14 +79,90 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (adapter.isIngredientMode()) {
+                    populateSuggestionAdapter(newText);
+                }
                 handleSearch(newText);
                 return true;
             }
         });
+        addSuggestions();
 
         categoryText = findViewById(R.id.search_category);
         clearCategory = findViewById(R.id.clear_category);
         clearCategory.setOnClickListener(v -> filterByCategory(null));
+
+        findViewById(R.id.switch_arrow).setOnClickListener(v -> toggleSearchMode());
+    }
+
+    private void toggleSearchMode() {
+        adapter.toggleIngredientMode();
+        boolean isIngredient = adapter.isIngredientMode();
+        int gray = getResources().getColor(R.color.gray, null);
+        int black = getResources().getColor(R.color.black, null);
+        TextView byIngredients = findViewById(R.id.by_ingredients);
+        TextView hint = findViewById(R.id.search_hint);
+        TextView byRecipe = findViewById(R.id.by_recipe);
+        byIngredients.setTextColor(isIngredient ? black : gray);
+        byRecipe.setTextColor(isIngredient ? gray : black);
+        hint.setVisibility(isIngredient ? View.VISIBLE : View.GONE);
+        searchView.setQueryHint(getString(isIngredient ? R.string.ingredients_list : R.string.recipe));
+    }
+
+    private void addSuggestions() {
+        String[] from = new String[] {"ingredientName"};
+        int[] to = new int[] {android.R.id.text1};
+        suggestionAdapter = new SimpleCursorAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                null,
+                from,
+                to,
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        searchView.setSuggestionsAdapter(suggestionAdapter);
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionClick(int position) {
+                Cursor cursor = (Cursor) suggestionAdapter.getItem(position);
+                String ingredientName = cursor.getString(cursor.getColumnIndex("ingredientName"));
+                String[] pieces = searchView.getQuery().toString().split(",", -1);
+                pieces[pieces.length - 1] = ingredientName;
+                StringBuilder queryBuilder = new StringBuilder();
+                for (String piece : pieces) {
+                    queryBuilder.append(piece);
+                    queryBuilder.append(",");
+                }
+                searchView.setQuery(queryBuilder.toString(), true);
+                return true;
+            }
+
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                return true;
+            }
+        });
+    }
+
+    private void populateSuggestionAdapter(String query) {
+        String[] pieces = query.split(",", -1);
+        query = pieces[pieces.length - 1];
+        MatrixCursor matrixCursor = new MatrixCursor(new String[]{ BaseColumns._ID, "ingredientName" });
+        if (query.isEmpty()) {
+            suggestionAdapter.changeCursor(matrixCursor);
+            return;
+        }
+        List<Ingredient> ingredients = AppDatabase.getInstance().ingredientDao().getAll();
+        List<String> ingredientsNames = new ArrayList<>();
+        for (Ingredient ingredient: ingredients){
+            ingredientsNames.add(ingredient.name);
+        }
+        for (int i = 0; i < ingredientsNames.size(); i++) {
+            String ingredient = ingredientsNames.get(i);
+            if (ingredient.toLowerCase().startsWith(query.toLowerCase())) {
+                matrixCursor.addRow(new Object[]{i, ingredient});
+            }
+        }
+        suggestionAdapter.changeCursor(matrixCursor);
     }
 
     private void handleSearch(String query) {
