@@ -1,6 +1,7 @@
 package com.example.recipeinator.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,7 +60,17 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User user = LoginActivity.getLoggedInUser();
+
         TextView username = findViewById(R.id.profileview_text);
-        username.setText(LoginActivity.getLoggedInUser().nickname);
+        username.setText(user.nickname);
+
+        ImageView imageView = findViewById(R.id.profile_picture);
+        if (user.pictureUri != null && !user.pictureUri.isEmpty()) {
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageURI(Uri.parse(user.pictureUri));
+        } else {
+            imageView.setVisibility(View.GONE);
+        }
     }
 }

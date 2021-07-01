@@ -28,20 +28,8 @@
         app:layout_constraintTop_toBottomOf="@id/edit_profile_label"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/picture_preview"
-        android:layout_width="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recipe_picture"
-        app:layout_constraintEnd_toStartOf="@+id/select_recipe_picture"
-        app:layout_constraintStart_toEndOf="@+id/recipe_picture"
-        app:layout_constraintTop_toTopOf="@+id/recipe_picture" />
-
     <EditText
-        android:id="@+id/recipe_picture"
+        android:id="@+id/profile_picture_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -52,17 +40,41 @@
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/user_data"
         app:layout_constraintTop_toBottomOf="@+id/user_data"
-        app:layout_constraintEnd_toStartOf="@id/picture_preview"/>
+        app:layout_constraintEnd_toStartOf="@id/remove_profile_picture"/>
 
     <Button
-        android:id="@+id/select_recipe_picture"
+        android:id="@+id/select_profile_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/select"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/recipe_picture"
+        app:layout_constraintBaseline_toBaselineOf="@+id/profile_picture_text"
         app:layout_constraintStart_toEndOf="@id/picture_preview"/>
+
+    <ImageView
+        android:id="@+id/remove_profile_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_close_24"
+        android:layout_marginStart="16dp"
+        app:tint="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/picture_preview"
+        app:layout_constraintStart_toEndOf="@+id/profile_picture_text"
+        app:layout_constraintTop_toTopOf="@+id/profile_picture_text"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_picture_text" />
+
+    <ImageView
+        android:id="@+id/picture_preview"
+        android:layout_width="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/remove_profile_picture"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_picture_text"
+        app:layout_constraintTop_toTopOf="@+id/profile_picture_text" />
 
     <Button
         android:id="@+id/edit_button"
@@ -73,7 +85,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_text" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

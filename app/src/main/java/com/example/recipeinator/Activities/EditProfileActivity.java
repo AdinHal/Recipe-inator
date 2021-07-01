@@ -3,6 +3,7 @@ package com.example.recipeinator.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private Uri pictureUri;
     private ImageView imageView;
     private EditText pictureName;
+    private ImageView removePicture;
     private final ActivityResultLauncher<Intent> selectImageLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -31,7 +33,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     pictureUri = result.getData().getData();
                     getContentResolver().takePersistableUriPermission(pictureUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     pictureName.setText(pictureUri.getLastPathSegment());
-                    runOnUiThread(() -> imageView.setImageURI(result.getData().getData()));
+                    runOnUiThread(() -> {
+                        imageView.setImageURI(result.getData().getData());
+                        removePicture.setVisibility(View.VISIBLE);
+                        imageView.setVisibility(View.VISIBLE);
+                    });
                 }
             }
     );
@@ -49,13 +55,16 @@ public class EditProfileActivity extends AppCompatActivity {
         user = LoginActivity.getLoggedInUser();
 
         imageView = findViewById(R.id.picture_preview);
-        pictureName = findViewById(R.id.recipe_picture);
-        Button selectPicture = findViewById(R.id.select_recipe_picture);
+        pictureName = findViewById(R.id.profile_picture_text);
+        Button selectPicture = findViewById(R.id.select_profile_picture);
         selectPicture.setOnClickListener(v -> selectImage());
         if (user.pictureUri != null && !user.pictureUri.isEmpty()) {
             pictureUri = Uri.parse(user.pictureUri);
             imageView.setImageURI(pictureUri);
             pictureName.setText(pictureUri.getLastPathSegment());
+        } else {
+            removePicture.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
         }
 
         nickname = findViewById(R.id.register_nickname);
@@ -69,6 +78,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Button edit = findViewById(R.id.edit_button);
         edit.setOnClickListener(v -> updateUser());
+
+        removePicture = findViewById(R.id.remove_profile_picture);
+        removePicture.setOnClickListener(v -> removePicture());
+    }
+
+    private void removePicture() {
+        pictureUri = Uri.EMPTY;
+        imageView.setImageURI(pictureUri);
+        pictureName.setText("");
+        removePicture.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
     }
 
     private void updateUser() {
