@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.recipeinator.models.Ingredient;
+import com.example.recipeinator.models.IngredientWithRecipes;
 
 import java.util.List;
 
@@ -13,6 +14,9 @@ import java.util.List;
 public interface IngredientDao {
     @Query("SELECT * FROM Ingredient")
     List<Ingredient> getAll();
+
+    @Query("SELECT * FROM Ingredient")
+    List<IngredientWithRecipes> getAllWithRecipes();
 
     @Query("SELECT * FROM Ingredient WHERE name=:name")
     Ingredient getByName(String name);
