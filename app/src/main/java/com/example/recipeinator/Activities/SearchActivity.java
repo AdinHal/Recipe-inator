@@ -107,6 +107,7 @@ public class SearchActivity extends AppCompatActivity {
         byRecipe.setTextColor(isIngredient ? gray : black);
         hint.setVisibility(isIngredient ? View.VISIBLE : View.GONE);
         searchView.setQueryHint(getString(isIngredient ? R.string.ingredients_list : R.string.recipe));
+        searchView.setQuery(searchView.getQuery(), true);
     }
 
     private void addSuggestions() {
