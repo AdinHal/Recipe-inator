@@ -66,4 +66,6 @@
     <string name="all">ALL</string>
     <string name="any">ANY</string>
     <string name="ingredients_list">Ingredient1, Ingredient2, …</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change">Change</string>
 </resources>

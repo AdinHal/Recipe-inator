@@ -19,7 +19,7 @@
         <activity android:name=".Activities.HomeActivity"/>
         <activity android:name=".Activities.LoginActivity"/>
         <activity android:name=".Activities.RegisterActivity"/>
-        <activity android:name=".Activities.TimerActivity"/>
+        <activity android:name=".Activities.EditProfileActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

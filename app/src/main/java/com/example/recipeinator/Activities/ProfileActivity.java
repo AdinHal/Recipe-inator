@@ -21,7 +21,7 @@ import com.example.recipeinator.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfileActivity extends AppCompatActivity {
-    private ImageView logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -43,14 +43,15 @@ public class ProfileActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        logout = findViewById(R.id.profile_logout);
+        findViewById(R.id.profile_logout).setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(intent);
-            }
+        findViewById(R.id.profile_edit).setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+            startActivity(intent);
         });
 
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);

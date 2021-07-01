@@ -17,6 +17,17 @@
         app:layout_constraintVertical_bias="0.057"
         app:srcCompat="@drawable/logout" />
 
+    <ImageView
+        android:id="@+id/profile_edit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toEndOf="@id/profileview_text"
+        app:layout_constraintTop_toTopOf="@id/profileview_text"
+        app:layout_constraintBottom_toBottomOf="@id/profileview_text"
+        android:layout_marginStart="16dp"
+        app:tint="@color/black"
+        app:srcCompat="@drawable/ic_baseline_edit_24" />
+
     <TextView
         android:id="@+id/profileview_text"
         android:layout_width="wrap_content"
