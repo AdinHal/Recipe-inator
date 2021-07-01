@@ -62,6 +62,8 @@
     <string name="servings">Servings</string>
     <string name="difficulty">Difficulty</string>
     <string name="all_recipes">All recipes</string>
-    <string name="hint">HINT: You can search for multiple ingredients by separating them with a comma. This will show recipes that contain ALL ingredients.</string>
+    <string name="hint">HINT: You can search for multiple ingredients by separating them with a comma. This will show recipes that contain %1$s ingredients.</string>
+    <string name="all">ALL</string>
+    <string name="any">ANY</string>
     <string name="ingredients_list">Ingredient1, Ingredient2, …</string>
 </resources>

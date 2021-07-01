@@ -96,7 +96,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void toggleSearchMode() {
-        adapter.toggleIngredientMode();
+        adapter.toggleMode();
         boolean isIngredient = adapter.isIngredientMode();
         int gray = getResources().getColor(R.color.gray, null);
         int black = getResources().getColor(R.color.black, null);
@@ -108,6 +108,11 @@ public class SearchActivity extends AppCompatActivity {
         hint.setVisibility(isIngredient ? View.VISIBLE : View.GONE);
         searchView.setQueryHint(getString(isIngredient ? R.string.ingredients_list : R.string.recipe));
         searchView.setQuery(searchView.getQuery(), true);
+        hint.setText(getString(R.string.hint, getString(adapter.getIngredientModeStringId())));
+        hint.setOnClickListener(v -> {
+            adapter.toggleIngredientMode();
+            hint.setText(getString(R.string.hint, getString(adapter.getIngredientModeStringId())));
+        });
     }
 
     private void addSuggestions() {

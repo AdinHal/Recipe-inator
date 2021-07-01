@@ -1,5 +1,6 @@
 package com.example.recipeinator.Adapters;
 
+import com.example.recipeinator.R;
 import com.example.recipeinator.models.Category;
 import com.example.recipeinator.models.Ingredient;
 import com.example.recipeinator.models.IngredientWithRecipes;
@@ -14,9 +15,11 @@ import java.util.Set;
 public class SearchRecipeAdapter extends RecipeAdapter {
     private final List<Recipe> filteredRecipes = new ArrayList<>();
     private final List<IngredientWithRecipes> ingredientWithRecipes;
-    private boolean isIngredientMode = false;
+    private Mode mode = Mode.RECIPE;
     private Category filteredCategory;
     private String filteredName;
+
+    public enum Mode{RECIPE, INGREDIENT_OR, INGREDIENT_AND}
 
     public SearchRecipeAdapter(List<Recipe> recipes, OnItemClickListener itemClickListener, List<IngredientWithRecipes> ingredientWithRecipes) {
         super(recipes, itemClickListener);
@@ -26,10 +29,18 @@ public class SearchRecipeAdapter extends RecipeAdapter {
 
     public void filter() {
         filteredRecipes.clear();
-        if (isIngredientMode()) {
-            filterByIngredientAnd();
-        } else {
-            filterByRecipe();
+        switch (mode) {
+            case RECIPE:
+                filterByRecipe();
+                break;
+            case INGREDIENT_OR:
+                filterByIngredientOr();
+                break;
+            case INGREDIENT_AND:
+                filterByIngredientAnd();
+                break;
+            default:
+                break;
         }
         notifyDataSetChanged();
     }
@@ -67,15 +78,26 @@ public class SearchRecipeAdapter extends RecipeAdapter {
     }
 
     public boolean isIngredientMode() {
-        return isIngredientMode;
+        return mode == Mode.INGREDIENT_AND || mode == Mode.INGREDIENT_OR;
+    }
+
+    public void toggleMode() {
+        mode = mode == Mode.RECIPE ? Mode.INGREDIENT_AND : Mode.RECIPE;
     }
 
     public void toggleIngredientMode() {
-        isIngredientMode = !isIngredientMode;
+        mode = mode == Mode.INGREDIENT_AND ? Mode.INGREDIENT_OR : Mode.INGREDIENT_AND;
     }
 
-    public void setIngredientMode(boolean ingredientMode) {
-        this.isIngredientMode = ingredientMode;
+    public int getIngredientModeStringId() {
+        if (mode == Mode.INGREDIENT_OR) {
+            return R.string.any;
+        }
+        return R.string.all;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
     }
 
     public void filterName(String query) {
@@ -106,7 +128,7 @@ public class SearchRecipeAdapter extends RecipeAdapter {
     }
 
     private boolean matchesAnyIngredient(Ingredient ingredient) {
-        if (filteredName == null) {
+        if (filteredName == null || filteredName.isEmpty()) {
             return true;
         }
         for (String namePart : filteredName.split(",")) {
@@ -118,7 +140,7 @@ public class SearchRecipeAdapter extends RecipeAdapter {
     }
 
     private boolean matchesAllIngredients(Recipe recipe) {
-        if (filteredName == null) {
+        if (filteredName == null || filteredName.isEmpty()) {
             return true;
         }
         for (String namePart : filteredName.split(",")) {
