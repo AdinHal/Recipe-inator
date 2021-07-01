@@ -48,7 +48,7 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
-        bottomNavbar.setSelectedItemId(R.id.page_list);
+        bottomNavbar.setSelectedItemId(R.id.page_profile);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
 
         database = AppDatabase.getInstance();
@@ -56,6 +56,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.picture_preview);
         pictureName = findViewById(R.id.profile_picture_text);
+        removePicture = findViewById(R.id.remove_profile_picture);
+        removePicture.setOnClickListener(v -> removePicture());
         Button selectPicture = findViewById(R.id.select_profile_picture);
         selectPicture.setOnClickListener(v -> selectImage());
         if (user.pictureUri != null && !user.pictureUri.isEmpty()) {
@@ -63,6 +65,7 @@ public class EditProfileActivity extends AppCompatActivity {
             imageView.setImageURI(pictureUri);
             pictureName.setText(pictureUri.getLastPathSegment());
         } else {
+            pictureUri = Uri.EMPTY;
             removePicture.setVisibility(View.GONE);
             imageView.setVisibility(View.GONE);
         }
@@ -78,9 +81,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Button edit = findViewById(R.id.edit_button);
         edit.setOnClickListener(v -> updateUser());
-
-        removePicture = findViewById(R.id.remove_profile_picture);
-        removePicture.setOnClickListener(v -> removePicture());
     }
 
     private void removePicture() {
