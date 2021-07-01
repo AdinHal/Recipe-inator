@@ -13,6 +13,7 @@ public class User {
     @ColumnInfo(name = "name") public String name;
     @ColumnInfo(name = "email") public String email;
     @ColumnInfo(name = "password") public String password;
+    @ColumnInfo(name = "picture_uri") public String pictureUri;
 
     public User(){
     }

@@ -14,9 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recipeinator.AppDatabase;
 import com.example.recipeinator.BottomNavbarListener;
 import com.example.recipeinator.R;
+import com.example.recipeinator.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class EditProfileActivity extends AppCompatActivity {
+    private User user;
+    private AppDatabase database;
+    private EditText nickname, name, email, password;
     private Uri pictureUri;
     private ImageView imageView;
     private EditText pictureName;
@@ -41,10 +45,40 @@ public class EditProfileActivity extends AppCompatActivity {
         bottomNavbar.setSelectedItemId(R.id.page_list);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
 
+        database = AppDatabase.getInstance();
+        user = LoginActivity.getLoggedInUser();
+
         imageView = findViewById(R.id.picture_preview);
         pictureName = findViewById(R.id.recipe_picture);
         Button selectPicture = findViewById(R.id.select_recipe_picture);
         selectPicture.setOnClickListener(v -> selectImage());
+        if (user.pictureUri != null && !user.pictureUri.isEmpty()) {
+            pictureUri = Uri.parse(user.pictureUri);
+            imageView.setImageURI(pictureUri);
+            pictureName.setText(pictureUri.getLastPathSegment());
+        }
+
+        nickname = findViewById(R.id.register_nickname);
+        nickname.setText(user.nickname);
+        name = findViewById(R.id.register_name);
+        name.setText(user.name);
+        email = findViewById(R.id.register_email);
+        email.setText(user.email);
+        password = findViewById(R.id.register_password);
+        password.setText(user.password);
+
+        Button edit = findViewById(R.id.edit_button);
+        edit.setOnClickListener(v -> updateUser());
+    }
+
+    private void updateUser() {
+        user.nickname = nickname.getText().toString();
+        user.name = name.getText().toString();
+        user.email = email.getText().toString();
+        user.password = password.getText().toString();
+        user.pictureUri = pictureUri.toString();
+        database.userDao().update(user);
+        finish();
     }
 
     private void selectImage(){

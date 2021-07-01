@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.example.recipeinator.models.User;
 import com.example.recipeinator.models.UserRecipeCrossRef;
@@ -30,4 +31,7 @@ public interface UserDao {
 
     @Delete
     void deleteUserRecipes(UserRecipeCrossRef... crossRefs);
+
+    @Update
+    void update(User user);
 }

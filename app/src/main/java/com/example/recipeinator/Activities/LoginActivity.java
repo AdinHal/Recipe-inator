@@ -1,6 +1,5 @@
 package com.example.recipeinator.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -44,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 getApplicationContext(),
                 AppDatabase.class,
                 "database"
-        ).addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3
+        ).addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4
         ).addCallback(new RoomDatabase.Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {

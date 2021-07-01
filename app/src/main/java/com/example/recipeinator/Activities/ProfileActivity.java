@@ -27,9 +27,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        TextView username = findViewById(R.id.profileview_text);
-        username.setText(LoginActivity.getLoggedInUser().nickname);
-
         AppDatabase database = AppDatabase.getInstance();
         User user = LoginActivity.getLoggedInUser();
         RecyclerView recyclerView = findViewById(R.id.favorite_recycler);
@@ -57,5 +54,12 @@ public class ProfileActivity extends AppCompatActivity {
         BottomNavigationView bottomNavbar = findViewById(R.id.bottom_navbar);
         bottomNavbar.setSelectedItemId(R.id.page_profile);
         bottomNavbar.setOnNavigationItemSelectedListener(new BottomNavbarListener(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView username = findViewById(R.id.profileview_text);
+        username.setText(LoginActivity.getLoggedInUser().nickname);
     }
 }
