@@ -3,8 +3,13 @@ package com.example.recipeinator.Activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
@@ -108,11 +113,21 @@ public class SearchActivity extends AppCompatActivity {
         hint.setVisibility(isIngredient ? View.VISIBLE : View.GONE);
         searchView.setQueryHint(getString(isIngredient ? R.string.ingredients_list : R.string.recipe));
         searchView.setQuery(searchView.getQuery(), true);
-        hint.setText(getString(R.string.hint, getString(adapter.getIngredientModeStringId())));
+        setHintText(hint);
         hint.setOnClickListener(v -> {
             adapter.toggleIngredientMode();
-            hint.setText(getString(R.string.hint, getString(adapter.getIngredientModeStringId())));
+            setHintText(hint);
         });
+    }
+
+    private void setHintText(TextView hintView) {
+        String mode = getString(adapter.getIngredientModeStringId());
+        String text = getString(R.string.hint, getString(adapter.getIngredientModeStringId()));
+        Spannable spannable = new SpannableString(text);
+        int modeIndex = text.indexOf(mode);
+        spannable.setSpan(new ForegroundColorSpan(Color.rgb(3, 157, 252)), modeIndex, modeIndex + mode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new UnderlineSpan(), modeIndex, modeIndex + mode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        hintView.setText(spannable, TextView.BufferType.SPANNABLE);
     }
 
     private void addSuggestions() {
